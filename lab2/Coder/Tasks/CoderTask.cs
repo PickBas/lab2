@@ -5,7 +5,7 @@ namespace lab2.Coder.Tasks;
 public sealed class CoderTask : TaskManagement
 {
     public string description { get; set; }
-    public Dictionary<int, string> possibleActivities { get; set; }
+    public List<Tuple<int, string>> possibleActivities { get; set; }
     public int timeRequired { get; set; }
 
     private static CoderTask _instance;
@@ -13,14 +13,14 @@ public sealed class CoderTask : TaskManagement
     
     public CoderTask()
     {
-        possibleActivities = new Dictionary<int, string>();
+        possibleActivities = new List<Tuple<int, string>>();
         var timeReq = new[] {40, 45, 50};
-        possibleActivities.Add(40, "Review code");
-        possibleActivities.Add(45, "Write block of code");
-        possibleActivities.Add(50, "Merge pull request");
+        possibleActivities.Add(new Tuple<int, string>(timeReq[0], "Review code"));
+        possibleActivities.Add(new Tuple<int, string>(timeReq[1], "Write block of code"));
+        possibleActivities.Add(new Tuple<int, string>(timeReq[2], "Merge pull request"));
 
         timeRequired = timeReq[new Random().Next(timeReq.Length)];
-        description = possibleActivities[timeRequired];
+        description = possibleActivities[timeRequired].Item2;
     }
 
     public static CoderTask getInstance()
@@ -35,7 +35,7 @@ public sealed class CoderTask : TaskManagement
 
     public void appendActivity(string activity, int timeRequired)
     {
-        possibleActivities.Add(timeRequired, activity);
+        possibleActivities.Add(new Tuple<int, string>(timeRequired, activity));
         this.timeRequired = timeRequired;
         description = activity;
     }

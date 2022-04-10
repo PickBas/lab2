@@ -3,7 +3,7 @@
 public sealed class AnalyzePerformance : TaskManagement
 {
     public string description { get; set; }
-    public Dictionary<int, string> possibleActivities { get; set; }
+    public List<Tuple<int, string>> possibleActivities { get; set; }
     public int timeRequired { get; set; }
 
     private static AnalyzePerformance _instance;
@@ -11,14 +11,14 @@ public sealed class AnalyzePerformance : TaskManagement
     
     private AnalyzePerformance()
     {
-        possibleActivities = new Dictionary<int, string>();
+        possibleActivities = new List<Tuple<int, string>>();
         var timeReq = new[] {5, 10, 15};
-        possibleActivities.Add(timeReq[0], "Analyze coder performance");
-        possibleActivities.Add(timeReq[1], "Analyze designer performance");
-        possibleActivities.Add(timeReq[2], "Analyze group performance");
+        possibleActivities.Add(new Tuple<int, string>(timeReq[0], "Analyze coder performance"));
+        possibleActivities.Add(new Tuple<int, string>(timeReq[1], "Analyze designer performance"));
+        possibleActivities.Add(new Tuple<int, string>(timeReq[2], "Analyze group performance"));
         
         timeRequired = timeReq[new Random().Next(timeReq.Length)];
-        description = possibleActivities[timeRequired];
+        description = possibleActivities[timeRequired].Item2;
     }
 
     public static AnalyzePerformance getInstance()
@@ -33,7 +33,7 @@ public sealed class AnalyzePerformance : TaskManagement
 
     public void appendActivity(string activity, int timeRequired)
     {
-        possibleActivities.Add(timeRequired, activity);
+        possibleActivities.Add(new Tuple<int, string>(timeRequired, activity));
         this.timeRequired = timeRequired;
         description = activity;
     }
