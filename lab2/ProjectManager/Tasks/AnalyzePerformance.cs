@@ -1,33 +1,31 @@
-﻿using lab2.ProjectManager.Tasks;
+﻿namespace lab2.ProjectManager.Tasks;
 
-namespace lab2.Coder.Tasks;
-
-public sealed class CoderTask : TaskManagement
+public sealed class AnalyzePerformance : TaskManagement
 {
     public string description { get; set; }
     public Dictionary<int, string> possibleActivities { get; set; }
     public int timeRequired { get; set; }
 
-    private static CoderTask _instance;
+    private static AnalyzePerformance _instance;
     
     
-    public CoderTask()
+    private AnalyzePerformance()
     {
         possibleActivities = new Dictionary<int, string>();
-        var timeReq = new[] {40, 45, 50};
-        possibleActivities.Add(40, "Review code");
-        possibleActivities.Add(45, "Write block of code");
-        possibleActivities.Add(50, "Merge pull request");
-
+        var timeReq = new[] {5, 10, 15};
+        possibleActivities.Add(timeReq[0], "Analyze coder performance");
+        possibleActivities.Add(timeReq[1], "Analyze designer performance");
+        possibleActivities.Add(timeReq[2], "Analyze group performance");
+        
         timeRequired = timeReq[new Random().Next(timeReq.Length)];
         description = possibleActivities[timeRequired];
     }
 
-    public static CoderTask getInstance()
+    public static AnalyzePerformance getInstance()
     {
         if (_instance == null)
         {
-            _instance = new CoderTask();
+            _instance = new AnalyzePerformance();
         }
 
         return _instance;
