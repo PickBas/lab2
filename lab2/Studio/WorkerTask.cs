@@ -2,5 +2,6 @@
 
 public interface WorkerTask
 {
+    bool equals(WorkerTask workerTask);
     string ToString();
 }

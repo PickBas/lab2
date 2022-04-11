@@ -19,6 +19,12 @@ public class CoderTask : WorkerTask
         this.timeRequired = timeRequired;
     }
 
+    public bool @equals(WorkerTask workerTask)
+    {
+        CoderTask task = (CoderTask) workerTask;
+        return task.description == description;
+    }
+
     public string ToString()
     {
         return description + " Estimated time: " + timeRequired + " seconds.";

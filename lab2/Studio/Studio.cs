@@ -10,7 +10,6 @@ public class Studio
     private DesignerEntity designer { get; set; }
     private ProjectManagerEntity projectManager { get; set; }
 
-
     public Studio()
     {
         coder = new CoderEntity();

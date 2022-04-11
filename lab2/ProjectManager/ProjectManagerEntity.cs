@@ -10,9 +10,9 @@ public class ProjectManagerEntity : EntityManagement
     public ProjectManagerEntity()
     {
         projectManagerTasks = new List<WorkerTask>();
-        projectManagerTasks.Add(new AnalyzePerformance());
-        projectManagerTasks.Add(new AnalyzePerformance("Analyze designer performance", 20));
-        projectManagerTasks.Add(new AnalyzePerformance("Analyze group performance", 25));
+        projectManagerTasks.Add(new ProjectManagerTask());
+        projectManagerTasks.Add(new ProjectManagerTask("Analyze designer performance", 20));
+        projectManagerTasks.Add(new ProjectManagerTask("Analyze group performance", 25));
     }
 
     public void addTask(WorkerTask task)
@@ -22,6 +22,6 @@ public class ProjectManagerEntity : EntityManagement
 
     public void addTask(string description, int timeRequired)
     {
-        projectManagerTasks.Add(new AnalyzePerformance(description, timeRequired));
+        projectManagerTasks.Add(new ProjectManagerTask(description, timeRequired));
     }
 }
