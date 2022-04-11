@@ -5,11 +5,18 @@ namespace lab2.Coder;
 
 public class CoderEntity
 {
-    public TaskManagement currentTask { get; set; }
+    public List <CoderTask> coderTasks { get; set; }
 
-    public CoderEntity()
+    public CoderEntity(string description, int timeRequired)
     {
-        currentTask = CoderTask.getInstance();
+        coderTasks = new List<CoderTask>();
+        coderTasks.Add(new CoderTask(description, timeRequired));
+    }
+
+    public CoderEntity(CoderTask coderTask)
+    {
+        coderTasks = new List<CoderTask>();
+        coderTasks.Add(coderTask);
     }
 
 }
