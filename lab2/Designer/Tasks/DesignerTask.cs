@@ -2,49 +2,24 @@
 
 namespace lab2.Designer.Tasks;
 
-public sealed class DesignerTask : TaskManagement
+public class DesignerTask : WorkerTask
 {
     public string description { get; set; }
-    public List<Tuple<int, string>> possibleActivities { get; set; }
     public int timeRequired { get; set; }
-    private static DesignerTask _instance;
 
-    
-    
-    private DesignerTask()
+    public DesignerTask()
     {
-        possibleActivities = new List<Tuple<int, string>>();
-        var timeReq = new[] {15, 30, 40};
-        possibleActivities.Add(new Tuple<int, string>(timeReq[0], "Come up with an idea."));
-        possibleActivities.Add(new Tuple<int, string>(timeReq[1], "Create sketch."));
-        possibleActivities.Add(new Tuple<int, string>(timeReq[2], "Draw."));
-        timeRequired = timeReq[new Random().Next(timeReq.Length)];
-        description = possibleActivities[timeRequired].Item2;
-    }
-    
-    public static DesignerTask getInstance()
-    {
-        if (_instance == null)
-        {
-            _instance = new DesignerTask();
-        }
-
-        return _instance;
+        description = "Come up with an idea";
+        timeRequired = 15;
     }
 
-    public void appendActivity(string activity, int timeRequired)
+    public DesignerTask(string description, int timeRequired)
     {
-        possibleActivities.Add(new Tuple<int, string>(timeRequired, activity));
+        this.description = description;
         this.timeRequired = timeRequired;
-        description = activity;
     }
 
-    public double getPorpability()
-    {
-        return 1 / possibleActivities.Count * 100;
-    }
-
-    public string getLogString()
+    public string ToString()
     {
         return description + " Estimated time: " + timeRequired + " seconds.";
     }

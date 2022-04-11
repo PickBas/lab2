@@ -2,7 +2,7 @@
 
 namespace lab2.Coder.Tasks;
 
-public class CoderTask : TaskManagement
+public class CoderTask : WorkerTask
 {
     public string description { get; set; }
     public int timeRequired { get; set; }

@@ -4,11 +4,11 @@ namespace lab2.ProjectManager;
 
 public class ProjectManagerEntity
 {
-    public TaskManagement CurrentTaskManagement { get; set; }
+    public WorkerTask CurrentWorkerTask { get; set; }
 
     public ProjectManagerEntity()
     {
-        CurrentTaskManagement = AnalyzePerformance.getInstance();
+        CurrentWorkerTask = AnalyzePerformance.getInstance();
     }
 
 }

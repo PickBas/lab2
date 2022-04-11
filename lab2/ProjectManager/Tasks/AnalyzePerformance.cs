@@ -1,6 +1,6 @@
 ﻿namespace lab2.ProjectManager.Tasks;
 
-public sealed class AnalyzePerformance : TaskManagement
+public sealed class AnalyzePerformance : WorkerTask
 {
     public string description { get; set; }
     public List<Tuple<int, string>> possibleActivities { get; set; }
