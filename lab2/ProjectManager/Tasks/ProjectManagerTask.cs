@@ -1,20 +1,18 @@
-﻿using lab2.ProjectManager.Tasks;
-
-namespace lab2.Designer.Tasks
+﻿namespace lab2.ProjectManager.Tasks
 {
 
-    public class DesignerTask : WorkerTask
+    public class ProjectManagerTask : WorkerTask
     {
         public string description { get; set; }
         public int timeRequired { get; set; }
 
-        public DesignerTask()
+        public ProjectManagerTask()
         {
-            description = "Come up with an idea";
-            timeRequired = 15;
+            description = "Analyze coder performance";
+            timeRequired = 5;
         }
 
-        public DesignerTask(string description, int timeRequired)
+        public ProjectManagerTask(string description, int timeRequired)
         {
             this.description = description;
             this.timeRequired = timeRequired;
@@ -22,7 +20,7 @@ namespace lab2.Designer.Tasks
 
         public bool @equals(WorkerTask workerTask)
         {
-            var task = (DesignerTask)workerTask;
+            var task = (ProjectManagerTask)workerTask;
             return description == task.description;
         }
 
@@ -33,8 +31,8 @@ namespace lab2.Designer.Tasks
 
         public override bool Equals(object obj)
         {
-            DesignerTask task = (DesignerTask) obj;
-            return description == task.description;
+            var projectManagerTask2 = (ProjectManagerTask) obj;
+            return description == projectManagerTask2.description;
         }
     }
 }
