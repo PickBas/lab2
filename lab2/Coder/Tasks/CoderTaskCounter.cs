@@ -7,15 +7,15 @@ namespace lab2.Coder.Tasks
 
     public sealed class CoderTaskCounter
     {
-        public List<CoderTask> coderTasks { get; set; }
+        public List<Tuple<DateTime, CoderTask>> coderTasks { get; set; }
         private static CoderTaskCounter _instance;
 
         private CoderTaskCounter()
         {
-            coderTasks = new List<CoderTask>();
+            coderTasks = new List<Tuple<DateTime, CoderTask>>();
         }
 
-        public CoderTaskCounter getInstance()
+        public static CoderTaskCounter getInstance()
         {
             if (_instance == null)
             {
@@ -27,29 +27,35 @@ namespace lab2.Coder.Tasks
 
         public void addTask(CoderTask coderTask)
         {
-            coderTasks.Add(coderTask);
+            coderTasks.Add(new Tuple<DateTime, CoderTask>(DateTime.Now, coderTask));
         }
 
-        public List<Tuple<double, CoderTask>> getPropability()
+        public List<Tuple<double, CoderTask>> getProbability()
         {
-            List<CoderTask> coderTasksSorted = coderTasks.OrderBy(o => o.description).ToList();
+            List<Tuple<DateTime, CoderTask>> coderTasksSorted = coderTasks
+                .OrderBy(o => o.Item2.description)
+                .ToList();
             List<Tuple<int, CoderTask>> amounts = new List<Tuple<int, CoderTask>>();
-            CoderTask currentTask = coderTasksSorted.ElementAt(0);
+            CoderTask currentTask = coderTasksSorted[0].Item2;
             int counter = 1;
-            for (int i = 1; i < coderTasksSorted.Count; ++i)
+            for (int i = 0; i < coderTasksSorted.Count - 1; ++i)
             {
-                if (coderTasksSorted.ElementAt(i).Equals(coderTasksSorted.ElementAt(i - 1)))
+                if (coderTasksSorted[i].Item2.Equals(coderTasksSorted[i + 1].Item2))
                 {
                     ++counter;
                 }
                 else
                 {
                     amounts.Add(new Tuple<int, CoderTask>(counter, currentTask));
-                    counter = 1;
-                    currentTask = coderTasksSorted.ElementAt(i);
+                    counter = 0;
+                    currentTask = coderTasksSorted[i].Item2;
                 }
             }
-
+            if (amounts.Count != 0)
+            {
+                ++counter;
+            }
+            amounts.Add(new Tuple<int, CoderTask>(counter, currentTask));
             List<Tuple<double, CoderTask>> result = new List<Tuple<double, CoderTask>>();
             foreach (var entity in amounts)
             {

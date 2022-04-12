@@ -20,7 +20,7 @@ namespace Tests
             coderTasks.Add(new CoderTask("Merge block of code", 40));
             CollectionAssert.AreEqual(coderTasks, studio.coder.coderTasks);
         }
-        
+
         [TestMethod]
         public void designerTasksCheck()
         {
@@ -42,5 +42,7 @@ namespace Tests
             projectManagerTasks.Add(new ProjectManagerTask("Analyze group performance", 25));
             CollectionAssert.AreEqual(projectManagerTasks, studio.projectManager.projectManagerTasks);
         }
+        
+        
     }
 }

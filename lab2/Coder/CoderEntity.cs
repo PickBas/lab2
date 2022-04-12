@@ -18,11 +18,6 @@ namespace lab2.Coder
             coderTasks.Add(new CoderTask("Merge block of code", 40));
         }
 
-        public void addTask(WorkerTask task)
-        {
-            coderTasks.Add((CoderTask)task);
-        }
-
         public void addTask(string description, int timeRequired)
         {
             coderTasks.Add(new CoderTask(description, timeRequired));

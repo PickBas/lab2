@@ -30,7 +30,7 @@ namespace lab2.Designer.Tasks
             DesignerTasks.Add(DesignerTask);
         }
 
-        public List<Tuple<double, DesignerTask>> getPropability()
+        public List<Tuple<double, DesignerTask>> getProbability()
         {
             List<DesignerTask> DesignerTasksSorted = DesignerTasks.OrderBy(o => o.description).ToList();
             List<Tuple<int, DesignerTask>> amounts = new List<Tuple<int, DesignerTask>>();

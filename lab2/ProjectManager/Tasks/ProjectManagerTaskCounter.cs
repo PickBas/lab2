@@ -30,7 +30,7 @@ namespace lab2.ProjectManager.Tasks
             ProjectManagerTasks.Add(ProjectManagerTask);
         }
 
-        public List<Tuple<double, ProjectManagerTask>> getPropability()
+        public List<Tuple<double, ProjectManagerTask>> getProbability()
         {
             List<ProjectManagerTask> ProjectManagerTasksSorted = ProjectManagerTasks
                 .OrderBy(o => o.description)
