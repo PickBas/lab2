@@ -32,35 +32,21 @@ namespace lab2.Coder.Tasks
 
         public List<Tuple<double, CoderTask>> getProbability()
         {
-            List<Tuple<DateTime, CoderTask>> coderTasksSorted = coderTasks
+            var coderTasksSorted = coderTasks
                 .OrderBy(o => o.Item2.description)
+                .ToList()
+                .Select(o => o.Item2)
+                .ToList()
+                .GroupBy(o => new {o.description, o.timeRequired})
+                .Where(x => x.Count() > 1)
+                .Select(y => new { coderTask = y.Key, amount = y.Count() })
                 .ToList();
-            List<Tuple<int, CoderTask>> amounts = new List<Tuple<int, CoderTask>>();
-            CoderTask currentTask = coderTasksSorted[0].Item2;
-            int counter = 1;
-            for (int i = 0; i < coderTasksSorted.Count - 1; ++i)
-            {
-                if (coderTasksSorted[i].Item2.Equals(coderTasksSorted[i + 1].Item2))
-                {
-                    ++counter;
-                }
-                else
-                {
-                    amounts.Add(new Tuple<int, CoderTask>(counter, currentTask));
-                    counter = 0;
-                    currentTask = coderTasksSorted[i].Item2;
-                }
-            }
-            if (amounts.Count != 0)
-            {
-                ++counter;
-            }
-            amounts.Add(new Tuple<int, CoderTask>(counter, currentTask));
             List<Tuple<double, CoderTask>> result = new List<Tuple<double, CoderTask>>();
-            foreach (var entity in amounts)
+            foreach (var entity in coderTasksSorted)
             {
-                var propability = (double)entity.Item1 / (double)coderTasks.Count * 100;
-                result.Add(new Tuple<double, CoderTask>(propability, entity.Item2));
+                var probability = (double)entity.amount / (double)coderTasks.Count * 100;
+                result.Add(new Tuple<double, CoderTask>(probability, 
+                    new CoderTask(entity.coderTask.description, entity.coderTask.timeRequired)));
             }
             return result;
         }

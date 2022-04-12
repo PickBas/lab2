@@ -30,22 +30,25 @@ namespace lab2.Designer.Tasks
             designerTasks.Add(new Tuple<DateTime, DesignerTask>(DateTime.Now, designerTask));
         }
 
-        public List<Tuple<double, string>> getProbability()
+        public List<Tuple<double, DesignerTask>> getProbability()
         {
             var designerTasksSorted = designerTasks
                 .OrderBy(o => o.Item2.description)
                 .ToList()
                 .Select(o => o.Item2)
                 .ToList()
-                .GroupBy(o => o.description)
+                .GroupBy(o => new {o.description, o.timeRequired})
                 .Where(x => x.Count() > 1)
                 .Select(y => new { designerTask = y.Key, amount = y.Count() })
                 .ToList();
-            List<Tuple<double, string>> result = new List<Tuple<double, string>>();
+            List<Tuple<double, DesignerTask>> result = new List<Tuple<double, DesignerTask>>();
             foreach (var entity in designerTasksSorted)
             {
                 var probability = (double)entity.amount / (double)designerTasks.Count * 100;
-                result.Add(new Tuple<double, string>(probability, entity.designerTask));
+                result.Add(new Tuple<double, DesignerTask>(
+                    probability,
+                    new DesignerTask(entity.designerTask.description,
+                        entity.designerTask.timeRequired)));
             }
             return result;
         }

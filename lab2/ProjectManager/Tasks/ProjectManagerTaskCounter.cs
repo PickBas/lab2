@@ -7,12 +7,12 @@ namespace lab2.ProjectManager.Tasks
 
     public sealed class ProjectManagerTaskCounter
     {
-        public List<ProjectManagerTask> ProjectManagerTasks { get; set; }
+        public List<Tuple<DateTime, ProjectManagerTask>> projectManagerTasks { get; set; }
         private static ProjectManagerTaskCounter _instance;
 
         private ProjectManagerTaskCounter()
         {
-            ProjectManagerTasks = new List<ProjectManagerTask>();
+            projectManagerTasks = new List<Tuple<DateTime, ProjectManagerTask>>();
         }
 
         public static ProjectManagerTaskCounter getInstance()
@@ -27,36 +27,29 @@ namespace lab2.ProjectManager.Tasks
 
         public void addTask(ProjectManagerTask ProjectManagerTask)
         {
-            ProjectManagerTasks.Add(ProjectManagerTask);
+            projectManagerTasks.Add(new Tuple<DateTime, ProjectManagerTask>(DateTime.Now, ProjectManagerTask));
         }
 
         public List<Tuple<double, ProjectManagerTask>> getProbability()
         {
-            List<ProjectManagerTask> ProjectManagerTasksSorted = ProjectManagerTasks
-                .OrderBy(o => o.description)
+            var projectManagerTasksOrdered = projectManagerTasks
+                .OrderBy(o => o.Item2.description)
+                .ToList()
+                .Select(o => o.Item2)
+                .ToList()
+                .GroupBy(o => new {o.description, o.timeRequired})
+                .Where(x => x.Count() > 1)
+                .Select(y => new { projectManagerTask = y.Key, amount = y.Count() })
                 .ToList();
-            List<Tuple<int, ProjectManagerTask>> amounts = new List<Tuple<int, ProjectManagerTask>>();
-            ProjectManagerTask currentTask = ProjectManagerTasksSorted.ElementAt(0);
-            int counter = 1;
-            for (int i = 1; i < ProjectManagerTasksSorted.Count; ++i)
-            {
-                if (ProjectManagerTasksSorted.ElementAt(i).@equals(ProjectManagerTasksSorted.ElementAt(i - 1)))
-                {
-                    ++counter;
-                }
-                else
-                {
-                    amounts.Add(new Tuple<int, ProjectManagerTask>(counter, currentTask));
-                    counter = 1;
-                    currentTask = ProjectManagerTasksSorted.ElementAt(i);
-                }
-            }
-
             List<Tuple<double, ProjectManagerTask>> result = new List<Tuple<double, ProjectManagerTask>>();
-            foreach (var entity in amounts)
+            foreach (var entity in projectManagerTasksOrdered)
             {
-                var propability = (double)entity.Item1 / (double)ProjectManagerTasks.Count * 100;
-                result.Add(new Tuple<double, ProjectManagerTask>(propability, entity.Item2));
+                var probability = (double)entity.amount / (double)projectManagerTasks.Count * 100;
+                result.Add(new Tuple<double, ProjectManagerTask>(
+                    probability,
+                    new ProjectManagerTask(
+                        entity.projectManagerTask.description,
+                        entity.projectManagerTask.timeRequired)));
             }
             return result;
         }
