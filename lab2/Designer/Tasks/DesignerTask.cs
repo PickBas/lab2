@@ -1,32 +1,34 @@
 ﻿using lab2.ProjectManager.Tasks;
 
-namespace lab2.Designer.Tasks;
-
-public class DesignerTask : WorkerTask
+namespace lab2.Designer.Tasks
 {
-    public string description { get; set; }
-    public int timeRequired { get; set; }
 
-    public DesignerTask()
+    public class DesignerTask : WorkerTask
     {
-        description = "Come up with an idea";
-        timeRequired = 15;
-    }
+        public string description { get; set; }
+        public int timeRequired { get; set; }
 
-    public DesignerTask(string description, int timeRequired)
-    {
-        this.description = description;
-        this.timeRequired = timeRequired;
-    }
+        public DesignerTask()
+        {
+            description = "Come up with an idea";
+            timeRequired = 15;
+        }
 
-    public bool @equals(WorkerTask workerTask)
-    {
-        var task = (DesignerTask) workerTask;
-        return description == task.description;
-    }
+        public DesignerTask(string description, int timeRequired)
+        {
+            this.description = description;
+            this.timeRequired = timeRequired;
+        }
 
-    public string ToString()
-    {
-        return description + " Estimated time: " + timeRequired + " seconds.";
+        public bool @equals(WorkerTask workerTask)
+        {
+            var task = (DesignerTask)workerTask;
+            return description == task.description;
+        }
+
+        public override string ToString()
+        {
+            return description + " Estimated time: " + timeRequired + " seconds.";
+        }
     }
 }

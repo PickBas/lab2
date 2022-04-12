@@ -1,28 +1,31 @@
 ﻿using lab2.Coder.Tasks;
 using lab2.ProjectManager.Tasks;
 using lab2.Studio;
+using System.Collections.Generic;
 
-namespace lab2.Coder;
-
-public class CoderEntity : EntityManagement
+namespace lab2.Coder
 {
-    public List <WorkerTask> coderTasks { get; set; }
 
-    public CoderEntity()
+    public class CoderEntity : EntityManagement
     {
-        coderTasks = new List<WorkerTask>();
-        coderTasks.Add(new CoderTask());
-        coderTasks.Add(new CoderTask("Review code", 15));
-        coderTasks.Add(new CoderTask("Merge block of code", 40));
-    }
+        public List<WorkerTask> coderTasks { get; set; }
 
-    public void addTask(WorkerTask task)
-    {
-        coderTasks.Add(task);
-    }
+        public CoderEntity()
+        {
+            coderTasks = new List<WorkerTask>();
+            coderTasks.Add(new CoderTask());
+            coderTasks.Add(new CoderTask("Review code", 15));
+            coderTasks.Add(new CoderTask("Merge block of code", 40));
+        }
 
-    public void addTask(string description, int timeRequired)
-    {
-        coderTasks.Add(new CoderTask(description, timeRequired));
+        public void addTask(WorkerTask task)
+        {
+            coderTasks.Add(task);
+        }
+
+        public void addTask(string description, int timeRequired)
+        {
+            coderTasks.Add(new CoderTask(description, timeRequired));
+        }
     }
 }

@@ -1,28 +1,31 @@
 ﻿using lab2.Designer.Tasks;
 using lab2.ProjectManager.Tasks;
 using lab2.Studio;
+using System.Collections.Generic;
 
-namespace lab2.Designer;
-
-public class DesignerEntity : EntityManagement
+namespace lab2.Designer
 {
-    public List<WorkerTask> designerTasks { get; set; }
 
-    public DesignerEntity()
+    public class DesignerEntity : EntityManagement
     {
-        designerTasks = new List<WorkerTask>();
-        designerTasks.Add(new DesignerTask());
-        designerTasks.Add(new DesignerTask("Create sketch", 50));
-        designerTasks.Add(new DesignerTask("Draw", 60));
-    }
-    
-    public void addTask(WorkerTask task)
-    {
-        designerTasks.Add(task);
-    }
+        public List<WorkerTask> designerTasks { get; set; }
 
-    public void addTask(string description, int timeRequired)
-    {
-        designerTasks.Add(new DesignerTask(description, timeRequired));
+        public DesignerEntity()
+        {
+            designerTasks = new List<WorkerTask>();
+            designerTasks.Add(new DesignerTask());
+            designerTasks.Add(new DesignerTask("Create sketch", 50));
+            designerTasks.Add(new DesignerTask("Draw", 60));
+        }
+
+        public void addTask(WorkerTask task)
+        {
+            designerTasks.Add(task);
+        }
+
+        public void addTask(string description, int timeRequired)
+        {
+            designerTasks.Add(new DesignerTask(description, timeRequired));
+        }
     }
 }

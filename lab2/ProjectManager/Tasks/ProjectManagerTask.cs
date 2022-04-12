@@ -1,30 +1,32 @@
-﻿namespace lab2.ProjectManager.Tasks;
-
-public class ProjectManagerTask : WorkerTask
+﻿namespace lab2.ProjectManager.Tasks
 {
-    public string description { get; set; }
-    public int timeRequired { get; set; }
 
-    public ProjectManagerTask()
+    public class ProjectManagerTask : WorkerTask
     {
-        description = "Analyze coder performance";
-        timeRequired = 5;
-    }
+        public string description { get; set; }
+        public int timeRequired { get; set; }
 
-    public ProjectManagerTask(string description, int timeRequired)
-    {
-        this.description = description;
-        this.timeRequired = timeRequired;
-    }
+        public ProjectManagerTask()
+        {
+            description = "Analyze coder performance";
+            timeRequired = 5;
+        }
 
-    public bool @equals(WorkerTask workerTask)
-    {
-        var task = (ProjectManagerTask) workerTask;
-        return description == task.description;
-    }
+        public ProjectManagerTask(string description, int timeRequired)
+        {
+            this.description = description;
+            this.timeRequired = timeRequired;
+        }
 
-    public string ToString()
-    {
-        return description + " Estimated time: " + timeRequired + " seconds.";
+        public bool @equals(WorkerTask workerTask)
+        {
+            var task = (ProjectManagerTask)workerTask;
+            return description == task.description;
+        }
+
+        public override string ToString()
+        {
+            return description + " Estimated time: " + timeRequired + " seconds.";
+        }
     }
 }
