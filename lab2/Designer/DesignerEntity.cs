@@ -27,5 +27,11 @@ namespace lab2.Designer
         {
             designerTasks.Add(new DesignerTask(description, timeRequired));
         }
+
+        public override bool Equals(object obj)
+        {
+            DesignerEntity designerEntity = (DesignerEntity) obj;
+            return designerEntity.designerTasks.Equals(designerTasks);
+        }
     }
 }

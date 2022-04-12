@@ -25,5 +25,11 @@ namespace lab2.ProjectManager {
         {
             projectManagerTasks.Add(new ProjectManagerTask(description, timeRequired));
         }
+
+        public override bool Equals(object obj)
+        {
+            var projectManager2 = (ProjectManagerEntity) obj;
+            return projectManagerTasks == projectManager2.projectManagerTasks;
+        }
     }
 }
