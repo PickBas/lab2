@@ -16,14 +16,15 @@ namespace lab2.ProjectManager {
             projectManagerTasks.Add(new ProjectManagerTask("Analyze group performance", 25));
         }
 
-        public void addTask(WorkerTask task)
-        {
-            projectManagerTasks.Add(task);
-        }
-
         public void addTask(string description, int timeRequired)
         {
             projectManagerTasks.Add(new ProjectManagerTask(description, timeRequired));
+        }
+
+        public override bool Equals(object obj)
+        {
+            var projectManager2 = (ProjectManagerEntity) obj;
+            return projectManagerTasks == projectManager2.projectManagerTasks;
         }
     }
 }

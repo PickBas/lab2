@@ -7,15 +7,15 @@ namespace lab2.Designer.Tasks
 
     public sealed class DesignerTaskCounter
     {
-        public List<DesignerTask> DesignerTasks { get; set; }
+        public List<Tuple<DateTime, DesignerTask>> designerTasks { get; set; }
         private static DesignerTaskCounter _instance;
 
         private DesignerTaskCounter()
         {
-            DesignerTasks = new List<DesignerTask>();
+            designerTasks = new List<Tuple<DateTime, DesignerTask>>();
         }
 
-        public DesignerTaskCounter getInstance()
+        public static DesignerTaskCounter getInstance()
         {
             if (_instance == null)
             {
@@ -25,36 +25,30 @@ namespace lab2.Designer.Tasks
             return _instance;
         }
 
-        public void addTask(DesignerTask DesignerTask)
+        public void addTask(DesignerTask designerTask)
         {
-            DesignerTasks.Add(DesignerTask);
+            designerTasks.Add(new Tuple<DateTime, DesignerTask>(DateTime.Now, designerTask));
         }
 
-        public List<Tuple<double, DesignerTask>> getPropability()
+        public List<Tuple<double, DesignerTask>> getProbability()
         {
-            List<DesignerTask> DesignerTasksSorted = DesignerTasks.OrderBy(o => o.description).ToList();
-            List<Tuple<int, DesignerTask>> amounts = new List<Tuple<int, DesignerTask>>();
-            DesignerTask currentTask = DesignerTasksSorted.ElementAt(0);
-            int counter = 1;
-            for (int i = 1; i < DesignerTasksSorted.Count; ++i)
-            {
-                if (DesignerTasksSorted.ElementAt(i).@equals(DesignerTasksSorted.ElementAt(i - 1)))
-                {
-                    ++counter;
-                }
-                else
-                {
-                    amounts.Add(new Tuple<int, DesignerTask>(counter, currentTask));
-                    counter = 1;
-                    currentTask = DesignerTasksSorted.ElementAt(i);
-                }
-            }
-
+            var designerTasksSorted = designerTasks
+                .OrderBy(o => o.Item2.description)
+                .ToList()
+                .Select(o => o.Item2)
+                .ToList()
+                .GroupBy(o => new {o.description, o.timeRequired})
+                .Where(x => x.Count() > 1)
+                .Select(y => new { designerTask = y.Key, amount = y.Count() })
+                .ToList();
             List<Tuple<double, DesignerTask>> result = new List<Tuple<double, DesignerTask>>();
-            foreach (var entity in amounts)
+            foreach (var entity in designerTasksSorted)
             {
-                var propability = (double)entity.Item1 / (double)DesignerTasks.Count * 100;
-                result.Add(new Tuple<double, DesignerTask>(propability, entity.Item2));
+                var probability = (double)entity.amount / (double)designerTasks.Count * 100;
+                result.Add(new Tuple<double, DesignerTask>(
+                    probability,
+                    new DesignerTask(entity.designerTask.description,
+                        entity.designerTask.timeRequired)));
             }
             return result;
         }

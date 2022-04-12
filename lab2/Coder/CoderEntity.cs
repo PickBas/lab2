@@ -18,14 +18,15 @@ namespace lab2.Coder
             coderTasks.Add(new CoderTask("Merge block of code", 40));
         }
 
-        public void addTask(WorkerTask task)
-        {
-            coderTasks.Add(task);
-        }
-
         public void addTask(string description, int timeRequired)
         {
             coderTasks.Add(new CoderTask(description, timeRequired));
+        }
+
+        public override bool Equals(object obj)
+        {
+            CoderEntity obj2 = (CoderEntity) obj;
+            return coderTasks == obj2.coderTasks;
         }
     }
 }

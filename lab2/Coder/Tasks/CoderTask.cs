@@ -20,10 +20,10 @@ namespace lab2.Coder.Tasks
             this.timeRequired = timeRequired;
         }
 
-        public bool @equals(WorkerTask workerTask)
+        public override bool Equals(object obj)
         {
-            CoderTask task = (CoderTask)workerTask;
-            return task.description == description;
+            CoderTask coderTask2 = (CoderTask) obj;
+            return coderTask2.description == description;
         }
 
         public override string ToString()

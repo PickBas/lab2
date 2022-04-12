@@ -18,14 +18,15 @@ namespace lab2.Designer
             designerTasks.Add(new DesignerTask("Draw", 60));
         }
 
-        public void addTask(WorkerTask task)
-        {
-            designerTasks.Add(task);
-        }
-
         public void addTask(string description, int timeRequired)
         {
             designerTasks.Add(new DesignerTask(description, timeRequired));
+        }
+
+        public override bool Equals(object obj)
+        {
+            DesignerEntity designerEntity = (DesignerEntity) obj;
+            return designerEntity.designerTasks.Equals(designerTasks);
         }
     }
 }

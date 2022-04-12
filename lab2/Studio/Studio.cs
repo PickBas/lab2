@@ -7,8 +7,8 @@ namespace lab2.Studio
     public class Studio
     {
         public CoderEntity coder { get; set; }
-        private DesignerEntity designer { get; set; }
-        private ProjectManagerEntity projectManager { get; set; }
+        public DesignerEntity designer { get; set; }
+        public ProjectManagerEntity projectManager { get; set; }
 
         public Studio()
         {

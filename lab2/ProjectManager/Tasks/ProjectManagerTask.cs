@@ -28,5 +28,11 @@
         {
             return description + " Estimated time: " + timeRequired + " seconds.";
         }
+
+        public override bool Equals(object obj)
+        {
+            var projectManagerTask2 = (ProjectManagerTask) obj;
+            return description == projectManagerTask2.description;
+        }
     }
 }

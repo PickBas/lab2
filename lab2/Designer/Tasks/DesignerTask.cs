@@ -30,5 +30,11 @@ namespace lab2.Designer.Tasks
         {
             return description + " Estimated time: " + timeRequired + " seconds.";
         }
+
+        public override bool Equals(object obj)
+        {
+            DesignerTask task = (DesignerTask) obj;
+            return description == task.description;
+        }
     }
 }
