@@ -15,7 +15,7 @@ namespace lab2.ProjectManager.Tasks
             ProjectManagerTasks = new List<ProjectManagerTask>();
         }
 
-        public ProjectManagerTaskCounter getInstance()
+        public static ProjectManagerTaskCounter getInstance()
         {
             if (_instance == null)
             {
