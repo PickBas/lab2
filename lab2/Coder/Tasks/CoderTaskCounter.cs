@@ -38,7 +38,7 @@ namespace lab2.Coder.Tasks
             int counter = 1;
             for (int i = 1; i < coderTasksSorted.Count; ++i)
             {
-                if (coderTasksSorted.ElementAt(i).@equals(coderTasksSorted.ElementAt(i - 1)))
+                if (coderTasksSorted.ElementAt(i).Equals(coderTasksSorted.ElementAt(i - 1)))
                 {
                     ++counter;
                 }
