@@ -70,6 +70,7 @@
             this.runSimulation.TabIndex = 3;
             this.runSimulation.Text = "Run";
             this.runSimulation.UseVisualStyleBackColor = true;
+            this.runSimulation.Click += new System.EventHandler(this.runSimulation_Click);
             // 
             // projectManagerBtn
             // 

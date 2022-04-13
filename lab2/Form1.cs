@@ -7,19 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using lab2.Coder;
+using lab2.Designer;
+using lab2.ProjectManager;
+using lab2.Studio;
 
 namespace lab2
 {
     public partial class Form1 : Form
     {
+        public event Func<TextBox, bool> runningRandomTask;
+        public EventTaskManagement eventTaskManagement;
         public Form1()
         {
+            eventTaskManagement = EventTaskManagement.getInstance(new CoderEntity(),
+                new DesignerEntity(),
+                new ProjectManagerEntity());
+            runningRandomTask += eventTaskManagement.runRandomTask;
+
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void runSimulation_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            runningRandomTask.Invoke(logBox);
         }
     }
 }

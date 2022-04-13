@@ -33,6 +33,16 @@ namespace lab2.Coder.Tasks
             return coderTask2.description == description;
         }
 
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
         public override string ToString()
         {
             return description + " Estimated time: " + timeRequired + " seconds.";

@@ -31,6 +31,16 @@
             return description == task.description;
         }
 
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
         public override string ToString()
         {
             return description + " Estimated time: " + timeRequired + " seconds.";

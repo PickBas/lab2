@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Windows.Forms;
 using lab2.Coder;
 using lab2.Coder.Tasks;
 using lab2.Designer;
@@ -36,7 +38,7 @@ namespace lab2.Studio
             return _instance;
         }
 
-        public void runRandomTask()
+        public bool runRandomTask(TextBox logBox)
         {
             Random random = new Random();
             int entityChoice = random.Next(0, 3);
@@ -45,14 +47,20 @@ namespace lab2.Studio
             {
                 case 0:
                     task = new CoderTask(coder.getRandomTask());
+                    logBox.AppendText(task.ToString() + Environment.NewLine);
                     break;
                 case 1:
                     task = new DesignerTask(designer.getRandomTask());
+                    logBox.AppendText(task.ToString() + Environment.NewLine);
                     break;
                 case 2:
                     task = new ProjectManagerTask(projectManager.getRandomTask());
+                    logBox.AppendText(task.ToString() + Environment.NewLine);
                     break;
             }
+            Console.WriteLine("HERE");
+
+            return true;
         }
     }
 }
