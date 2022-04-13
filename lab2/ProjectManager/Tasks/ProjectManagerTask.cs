@@ -12,6 +12,13 @@
             timeRequired = 5;
         }
 
+        public ProjectManagerTask(WorkerTask workerTask)
+        {
+            ProjectManagerTask projectManagerTask = (ProjectManagerTask) workerTask;
+            description = projectManagerTask.description;
+            timeRequired = projectManagerTask.timeRequired;
+        }
+
         public ProjectManagerTask(string description, int timeRequired)
         {
             this.description = description;

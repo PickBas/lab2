@@ -1,4 +1,5 @@
-﻿using lab2.Designer.Tasks;
+﻿using System;
+using lab2.Designer.Tasks;
 using lab2.ProjectManager.Tasks;
 using lab2.Studio;
 using System.Collections.Generic;
@@ -21,6 +22,12 @@ namespace lab2.Designer
         public void addTask(string description, int timeRequired)
         {
             designerTasks.Add(new DesignerTask(description, timeRequired));
+        }
+
+        public WorkerTask getRandomTask()
+        {
+            return designerTasks[new Random().Next(designerTasks.Count)];
+
         }
 
         public override bool Equals(object obj)

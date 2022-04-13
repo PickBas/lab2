@@ -14,6 +14,13 @@ namespace lab2.Coder.Tasks
             timeRequired = 30;
         }
 
+        public CoderTask(WorkerTask workerTask)
+        {
+            CoderTask coderTask = (CoderTask) workerTask;
+            description = coderTask.description;
+            timeRequired = coderTask.timeRequired;
+        }
+
         public CoderTask(string description, int timeRequired)
         {
             this.description = description;

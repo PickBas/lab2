@@ -14,6 +14,13 @@ namespace lab2.Designer.Tasks
             timeRequired = 15;
         }
 
+        public DesignerTask(WorkerTask workerTask)
+        {
+            DesignerTask designerTask = (DesignerTask) workerTask;
+            description = designerTask.description;
+            timeRequired = designerTask.timeRequired;
+        }
+
         public DesignerTask(string description, int timeRequired)
         {
             this.description = description;

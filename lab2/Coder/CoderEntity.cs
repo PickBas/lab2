@@ -1,4 +1,5 @@
-﻿using lab2.Coder.Tasks;
+﻿using System;
+using lab2.Coder.Tasks;
 using lab2.ProjectManager.Tasks;
 using lab2.Studio;
 using System.Collections.Generic;
@@ -16,6 +17,11 @@ namespace lab2.Coder
             coderTasks.Add(new CoderTask());
             coderTasks.Add(new CoderTask("Review code", 15));
             coderTasks.Add(new CoderTask("Merge block of code", 40));
+        }
+
+        public WorkerTask getRandomTask()
+        {
+            return coderTasks[new Random().Next(coderTasks.Count)];
         }
 
         public void addTask(string description, int timeRequired)

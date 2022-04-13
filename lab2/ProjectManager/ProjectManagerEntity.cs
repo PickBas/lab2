@@ -1,4 +1,5 @@
-﻿using lab2.ProjectManager.Tasks;
+﻿using System;
+using lab2.ProjectManager.Tasks;
 using lab2.Studio;
 using System.Collections.Generic;
 
@@ -19,6 +20,12 @@ namespace lab2.ProjectManager {
         public void addTask(string description, int timeRequired)
         {
             projectManagerTasks.Add(new ProjectManagerTask(description, timeRequired));
+        }
+
+        public WorkerTask getRandomTask()
+        {
+            return projectManagerTasks[new Random().Next(projectManagerTasks.Count)];
+
         }
 
         public override bool Equals(object obj)
