@@ -64,6 +64,7 @@
     <Compile Include="ProjectManager\ProjectManagerEntity.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTask.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTaskCounter.cs" />
+    <Compile Include="Studio\CounterManagement.cs" />
     <Compile Include="Studio\EntityManagement.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
