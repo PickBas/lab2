@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using lab2.Coder;
@@ -16,6 +17,8 @@ namespace lab2.Studio
         public CoderEntity coder { get; set; }
         public DesignerEntity designer { get; set; }
         public ProjectManagerEntity projectManager { get; set; }
+        private bool isRunning;
+        private Thread _thread;
         private static EventTaskManagement _instance;
 
         private EventTaskManagement(CoderEntity coder,
@@ -25,6 +28,8 @@ namespace lab2.Studio
             this.coder = coder;
             this.designer = designer;
             this.projectManager = projectManager;
+            isRunning = false;
+            
         }
 
         public static EventTaskManagement getInstance(CoderEntity coder,
@@ -39,6 +44,30 @@ namespace lab2.Studio
             return _instance;
         }
 
+        public bool runEventHendler(TextBox textBox)
+        {
+            isRunning = true;
+            _thread = new Thread(() => 
+            {
+                Thread.CurrentThread.IsBackground = true; 
+                runRandomTask(textBox);
+            });
+            _thread.Start();
+            return true;
+        }
+
+        public bool stopEventHendler(TextBox logBox)
+        {
+            isRunning = false;
+            if (_thread != null)
+            {
+                _thread.Abort();
+            }
+
+            logBox.AppendText("Stopped simulation" + Environment.NewLine);
+            return false;
+        }
+
         private void logDelay(WorkerTask task, TextBox logBox)
         {
             logBox.AppendText(task.ToString() + Environment.NewLine);
@@ -47,11 +76,20 @@ namespace lab2.Studio
                     "Finished: " + task.getDescription() + Environment.NewLine));
         }
         
-        public bool runRandomTask(TextBox logBox)
+        public async void runRandomTask(TextBox logBox)
         {
             Random random = new Random();
-            int entityChoice = random.Next(0, 3);
             WorkerTask task = new CoderTask();
+            while (isRunning)
+            {
+                await Task.Delay(new Random().Next(1, 10) * 1000)
+                    .ContinueWith(t => executeRandomTask(logBox, task));
+            }
+        }
+
+        private void executeRandomTask(TextBox logBox, WorkerTask task)
+        {
+            int entityChoice = new Random().Next(0, 3);
             switch (entityChoice)
             {
                 case 0:
@@ -67,8 +105,6 @@ namespace lab2.Studio
                     logDelay(task, logBox);
                     break;
             }
-
-            return true;
         }
     }
 }

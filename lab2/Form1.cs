@@ -23,7 +23,7 @@ namespace lab2
             eventTaskManagement = EventTaskManagement.getInstance(new CoderEntity(),
                 new DesignerEntity(),
                 new ProjectManagerEntity());
-            runningRandomTask += eventTaskManagement.runRandomTask;
+            runningRandomTask += eventTaskManagement.runEventHendler;
 
             InitializeComponent();
         }
