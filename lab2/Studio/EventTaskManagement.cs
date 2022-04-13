@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using lab2.Coder;
 using lab2.Coder.Tasks;
 using lab2.Designer;
+using lab2.Designer.Tasks;
 using lab2.ProjectManager;
 using lab2.ProjectManager.Tasks;
 
@@ -15,6 +16,9 @@ namespace lab2.Studio
         private readonly CoderEntity _coder;
         private readonly DesignerEntity _designer;
         private readonly ProjectManagerEntity _projectManager;
+        public CoderTaskCounter coderTaskCounter { get; }
+        public DesignerTaskCounter designerTaskCounter { get; }
+        public ProjectManagerTaskCounter projectManagerTaskCounter { get; }
         private bool _isRunning;
         private Thread _thread;
         private CancellationTokenSource _tokenSource;
@@ -27,6 +31,9 @@ namespace lab2.Studio
             _coder = coder;
             _designer = designer;
             _projectManager = projectManager;
+            coderTaskCounter = CoderTaskCounter.getInstance();
+            designerTaskCounter = DesignerTaskCounter.getInstance();
+            projectManagerTaskCounter = ProjectManagerTaskCounter.getInstance();
             _isRunning = false;
             _tokenSource = new CancellationTokenSource();
         }
@@ -40,7 +47,6 @@ namespace lab2.Studio
             {
                 _instance = new EventTaskManagement(coder, designer, projectManager);
             }
-
             return _instance;
         }
 
@@ -52,7 +58,6 @@ namespace lab2.Studio
                 Thread.CurrentThread.IsBackground = true;
                 _tokenSource = new CancellationTokenSource();
                 runRandomTask(textBox);
-
             });
             _thread.Start();
             return true;
@@ -80,16 +85,18 @@ namespace lab2.Studio
         public async void runRandomTask(TextBox logBox)
         {
             WorkerTask task = new CoderTask();
+            Random random = new Random();
             while (_isRunning)
             {
-                await Task.Delay(new Random().Next(1, 10) * 1000, _tokenSource.Token)
+                await Task.Delay(random.Next(1, 10) * 1000, _tokenSource.Token)
                     .ContinueWith(t => executeRandomTask(logBox, task));
             }
         }
 
         private void executeRandomTask(TextBox logBox, WorkerTask task)
         {
-            int entityChoice = new Random().Next(0, 3);
+            Random random = new Random();
+            int entityChoice = random.Next(0, 3);
             if (_tokenSource.IsCancellationRequested)
             {
                 return;
@@ -98,14 +105,17 @@ namespace lab2.Studio
             {
                 case 0:
                     task = _coder.getRandomTask();
+                    coderTaskCounter.addTask((CoderTask)task);
                     logDelay(task, logBox);
                     break;
                 case 1:
                     task = _designer.getRandomTask();
+                    designerTaskCounter.addTask((DesignerTask)task);
                     logDelay(task, logBox);
                     break;
                 case 2:
                     task = _projectManager.getRandomTask();
+                    projectManagerTaskCounter.addTask((ProjectManagerTask)task);
                     logDelay(task, logBox);
                     break;
             }
