@@ -37,7 +37,7 @@ namespace lab2.Designer.Tasks
             List<Tuple<DateTime, WorkerTask>> tasks = new List<Tuple<DateTime, WorkerTask>>();
             foreach (var task in designerTasks)
             {
-                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, (WorkerTask)task.Item2));
+                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, task.Item2));
             }
             return tasks;
         }

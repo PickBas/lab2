@@ -36,7 +36,7 @@ namespace lab2
 
         private void coderInfoBtn_Click(object sender, EventArgs e)
         {
-            EntityForm entityForm = new EntityForm();
+            EntityForm entityForm = new EntityForm(eventTaskManagement.coderTaskCounter, "CoderTask");
             entityForm.Show();
         }
     }

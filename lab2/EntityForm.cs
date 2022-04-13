@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using lab2.Studio;
 
 namespace lab2
 {
     public partial class EntityForm : Form
     {
-        public EntityForm()
+        public EntityForm(CounterManagement counterManagement, string type)
         {
             InitializeComponent();
             DataTable table = new DataTable();
@@ -16,11 +17,15 @@ namespace lab2
             table.Columns.Add("%");
             table.Columns.Add("LastTimeCalled");
             DataRow dr = table.NewRow();
-            dr["#"] = "100";
-            dr["Type"] = "ProjectManagerTask";
-            dr["Description"] = "Analyze designer performance";
-            dr["%"] = "100";
-            dr["LastTimeCalled"] = DateTime.Now.ToString();
+            var tasks = counterManagement.getProbability();
+            for (int i = 0; i < tasks.Count; ++i)
+            {
+                dr["#"] = (i + 1).ToString();
+                dr["Type"] = type;
+                dr["Description"] = tasks[i].Item2.getDescription();
+                dr["%"] = tasks[i].Item1.ToString();
+                dr["LastTimeCalled"] = DateTime.Now.ToString();
+            }
             table.Rows.Add(dr);
             dataGridView1.DataSource = table;
             dataGridView1.Columns[0].Width = 30;

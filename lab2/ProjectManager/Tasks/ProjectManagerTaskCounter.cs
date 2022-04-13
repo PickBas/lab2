@@ -36,7 +36,7 @@ namespace lab2.ProjectManager.Tasks
             List<Tuple<DateTime, WorkerTask>> tasks = new List<Tuple<DateTime, WorkerTask>>();
             foreach (var task in projectManagerTasks)
             {
-                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, (WorkerTask)task.Item2));
+                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, task.Item2));
             }
             return tasks;
         }
@@ -49,7 +49,7 @@ namespace lab2.ProjectManager.Tasks
                 .Select(o => o.Item2)
                 .ToList()
                 .GroupBy(o => new {o.description, o.timeRequired})
-                .Where(x => x.Count() >= 1)
+                .Where(x => x.Any())
                 .Select(y => new { projectManagerTask = y.Key, amount = y.Count() })
                 .ToList();
             List<Tuple<double, WorkerTask>> result = new List<Tuple<double, WorkerTask>>();
