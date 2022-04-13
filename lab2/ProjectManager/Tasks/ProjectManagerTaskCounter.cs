@@ -30,6 +30,16 @@ namespace lab2.ProjectManager.Tasks
         {
             projectManagerTasks.Add(new Tuple<DateTime, ProjectManagerTask>(DateTime.Now, (ProjectManagerTask)projectManagerTask));
         }
+        
+        public List<Tuple<DateTime, WorkerTask>> getTasksWithDateTime()
+        {
+            List<Tuple<DateTime, WorkerTask>> tasks = new List<Tuple<DateTime, WorkerTask>>();
+            foreach (var task in projectManagerTasks)
+            {
+                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, (WorkerTask)task.Item2));
+            }
+            return tasks;
+        }
 
         public List<Tuple<double, WorkerTask>> getProbability()
         {
@@ -39,7 +49,7 @@ namespace lab2.ProjectManager.Tasks
                 .Select(o => o.Item2)
                 .ToList()
                 .GroupBy(o => new {o.description, o.timeRequired})
-                .Where(x => x.Count() > 1)
+                .Where(x => x.Count() >= 1)
                 .Select(y => new { projectManagerTask = y.Key, amount = y.Count() })
                 .ToList();
             List<Tuple<double, WorkerTask>> result = new List<Tuple<double, WorkerTask>>();

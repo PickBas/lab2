@@ -19,6 +19,8 @@ namespace Tests
             taskCounter.addTask((CoderTask)studio.coder.coderTasks[0]);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new CoderTask("Do something", 3));
+            Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
+            Assert.AreEqual(25.00, taskCounter.getProbability()[1].Item1);
             taskCounter.addTask(new CoderTask("Do something", 3));
             Assert.AreEqual(60.00, taskCounter.getProbability()[0].Item1);
             Assert.AreEqual(40.00, taskCounter.getProbability()[1].Item1);
@@ -34,6 +36,8 @@ namespace Tests
             taskCounter.addTask((DesignerTask)studio.designer.designerTasks[0]);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new DesignerTask("Do something", 3));
+            Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
+            Assert.AreEqual(25.00, taskCounter.getProbability()[1].Item1);
             taskCounter.addTask(new DesignerTask("Do something", 3));
             Assert.AreEqual(60.00, taskCounter.getProbability()[0].Item1);
             Assert.AreEqual(40.00, taskCounter.getProbability()[1].Item1);
@@ -49,6 +53,8 @@ namespace Tests
             taskCounter.addTask((ProjectManagerTask)studio.projectManager.projectManagerTasks[0]);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new ProjectManagerTask("Do something", 3));
+            Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
+            Assert.AreEqual(25.00, taskCounter.getProbability()[1].Item1);
             taskCounter.addTask(new ProjectManagerTask("Do something", 3));
             Assert.AreEqual(60.00, taskCounter.getProbability()[0].Item1);
             Assert.AreEqual(40.00, taskCounter.getProbability()[1].Item1);

@@ -7,6 +7,7 @@ namespace lab2.Studio
     public interface CounterManagement
     {
         void addTask(WorkerTask task);
+        List<Tuple<DateTime, WorkerTask>> getTasksWithDateTime();
         List<Tuple<double, WorkerTask>> getProbability();
     }
 }
