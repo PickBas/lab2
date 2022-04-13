@@ -39,5 +39,17 @@ namespace lab2
             EntityForm entityForm = new EntityForm(eventTaskManagement.coderTaskCounter, "CoderTask");
             entityForm.Show();
         }
+
+        private void designerInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm(eventTaskManagement.designerTaskCounter, "DesignerTask");
+            entityForm.Show();
+        }
+
+        private void projectManagerInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm(eventTaskManagement.projectManagerTaskCounter, "ProjectManagerTask");
+            entityForm.Show();
+        }
     }
 }

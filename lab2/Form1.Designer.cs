@@ -34,7 +34,7 @@
             this.runSimulation = new System.Windows.Forms.Button();
             this.coderAddTask = new System.Windows.Forms.Button();
             this.projectManagerAddTask = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.projectManagerInfoBtn = new System.Windows.Forms.Button();
             this.designerAddTask = new System.Windows.Forms.Button();
             this.designerInfoBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -95,14 +95,15 @@
             this.projectManagerAddTask.Text = "Add task";
             this.projectManagerAddTask.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // projectManagerInfoBtn
             // 
-            this.button3.Location = new System.Drawing.Point(24, 237);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(239, 45);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Project manager info";
-            this.button3.UseVisualStyleBackColor = true;
+            this.projectManagerInfoBtn.Location = new System.Drawing.Point(24, 237);
+            this.projectManagerInfoBtn.Name = "projectManagerInfoBtn";
+            this.projectManagerInfoBtn.Size = new System.Drawing.Size(239, 45);
+            this.projectManagerInfoBtn.TabIndex = 8;
+            this.projectManagerInfoBtn.Text = "Project manager info";
+            this.projectManagerInfoBtn.UseVisualStyleBackColor = true;
+            this.projectManagerInfoBtn.Click += new System.EventHandler(this.projectManagerInfoBtn_Click);
             // 
             // designerAddTask
             // 
@@ -121,6 +122,7 @@
             this.designerInfoBtn.TabIndex = 10;
             this.designerInfoBtn.Text = "Designer info";
             this.designerInfoBtn.UseVisualStyleBackColor = true;
+            this.designerInfoBtn.Click += new System.EventHandler(this.designerInfoBtn_Click);
             // 
             // Form1
             // 
@@ -130,7 +132,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.designerInfoBtn);
             this.Controls.Add(this.designerAddTask);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.projectManagerInfoBtn);
             this.Controls.Add(this.projectManagerAddTask);
             this.Controls.Add(this.coderAddTask);
             this.Controls.Add(this.runSimulation);
@@ -145,7 +147,7 @@
 
         private System.Windows.Forms.Button coderAddTask;
         private System.Windows.Forms.Button projectManagerAddTask;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button projectManagerInfoBtn;
         private System.Windows.Forms.Button designerAddTask;
         private System.Windows.Forms.Button designerInfoBtn;
 

@@ -16,17 +16,17 @@ namespace lab2
             table.Columns.Add("Description");
             table.Columns.Add("%");
             table.Columns.Add("LastTimeCalled");
-            DataRow dr = table.NewRow();
             var tasks = counterManagement.getProbability();
             for (int i = 0; i < tasks.Count; ++i)
             {
+                DataRow dr = table.NewRow();
                 dr["#"] = (i + 1).ToString();
                 dr["Type"] = type;
                 dr["Description"] = tasks[i].Item2.getDescription();
                 dr["%"] = tasks[i].Item1.ToString();
                 dr["LastTimeCalled"] = DateTime.Now.ToString();
+                table.Rows.Add(dr);
             }
-            table.Rows.Add(dr);
             dataGridView1.DataSource = table;
             dataGridView1.Columns[0].Width = 30;
             dataGridView1.Columns[1].Width = 115;
