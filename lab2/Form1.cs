@@ -17,6 +17,7 @@ namespace lab2
     public partial class Form1 : Form
     {
         public event Func<TextBox, bool> runningRandomTask;
+        public event Func<TextBox, bool> simulationStop;
         public EventTaskManagement eventTaskManagement;
         public Form1()
         {
@@ -24,6 +25,7 @@ namespace lab2
                 new DesignerEntity(),
                 new ProjectManagerEntity());
             runningRandomTask += eventTaskManagement.runEventHendler;
+            simulationStop += eventTaskManagement.stopEventHendler;
 
             InitializeComponent();
         }
@@ -31,6 +33,12 @@ namespace lab2
         private void runSimulation_Click(object sender, EventArgs e)
         {
             runningRandomTask.Invoke(logBox);
+        }
+
+        private void stopSimulation_Click(object sender, EventArgs e)
+        {
+            simulationStop.Invoke(logBox);
+            logBox.AppendText("Stopped simulation" + Environment.NewLine);
         }
     }
 }

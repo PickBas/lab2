@@ -19,6 +19,7 @@ namespace lab2.Studio
         public ProjectManagerEntity projectManager { get; set; }
         private bool isRunning;
         private Thread _thread;
+        private CancellationTokenSource _tokenSource;
         private static EventTaskManagement _instance;
 
         private EventTaskManagement(CoderEntity coder,
@@ -29,10 +30,11 @@ namespace lab2.Studio
             this.designer = designer;
             this.projectManager = projectManager;
             isRunning = false;
-            
+            _tokenSource = new CancellationTokenSource();
         }
 
-        public static EventTaskManagement getInstance(CoderEntity coder,
+        public static EventTaskManagement getInstance(
+            CoderEntity coder,
             DesignerEntity designer,
             ProjectManagerEntity projectManager)
         {
@@ -47,10 +49,16 @@ namespace lab2.Studio
         public bool runEventHendler(TextBox textBox)
         {
             isRunning = true;
+            if (_thread == null)
+            {
+                return false;
+            }
             _thread = new Thread(() => 
             {
-                Thread.CurrentThread.IsBackground = true; 
+                Thread.CurrentThread.IsBackground = true;
+                _tokenSource = new CancellationTokenSource();
                 runRandomTask(textBox);
+
             });
             _thread.Start();
             return true;
@@ -61,28 +69,26 @@ namespace lab2.Studio
             isRunning = false;
             if (_thread != null)
             {
+                runRandomTask(logBox);
+                _tokenSource.Cancel();
                 _thread.Abort();
             }
-
-            logBox.AppendText("Stopped simulation" + Environment.NewLine);
             return false;
         }
 
-        private void logDelay(WorkerTask task, TextBox logBox)
+        private async void logDelay(WorkerTask task, TextBox logBox)
         {
             logBox.AppendText(task.ToString() + Environment.NewLine);
-            Task.Delay(task.getTimeRequired() * 1000)
-                .ContinueWith(t=> logBox.AppendText(
-                    "Finished: " + task.getDescription() + Environment.NewLine));
+            await Task.Delay(task.getTimeRequired() * 1000, _tokenSource.Token)
+                .ContinueWith(t=> executeFinishTask(logBox, task));
         }
         
         public async void runRandomTask(TextBox logBox)
         {
-            Random random = new Random();
             WorkerTask task = new CoderTask();
             while (isRunning)
             {
-                await Task.Delay(new Random().Next(1, 10) * 1000)
+                await Task.Delay(new Random().Next(1, 10) * 1000, _tokenSource.Token)
                     .ContinueWith(t => executeRandomTask(logBox, task));
             }
         }
@@ -90,6 +96,10 @@ namespace lab2.Studio
         private void executeRandomTask(TextBox logBox, WorkerTask task)
         {
             int entityChoice = new Random().Next(0, 3);
+            if (_tokenSource.IsCancellationRequested)
+            {
+                return;
+            }
             switch (entityChoice)
             {
                 case 0:
@@ -105,6 +115,16 @@ namespace lab2.Studio
                     logDelay(task, logBox);
                     break;
             }
+        }
+
+        private void executeFinishTask(TextBox logBox, WorkerTask task)
+        {
+            if (_tokenSource.IsCancellationRequested)
+            {
+                return;
+            }
+            logBox.AppendText(
+                "Finished: " + task.getDescription() + Environment.NewLine);
         }
     }
 }

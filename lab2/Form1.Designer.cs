@@ -61,6 +61,7 @@
             this.stopSimulation.TabIndex = 2;
             this.stopSimulation.Text = "Stop";
             this.stopSimulation.UseVisualStyleBackColor = true;
+            this.stopSimulation.Click += new System.EventHandler(this.stopSimulation_Click);
             // 
             // runSimulation
             // 
