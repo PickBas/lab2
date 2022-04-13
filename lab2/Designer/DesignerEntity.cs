@@ -10,6 +10,7 @@ namespace lab2.Designer
     public class DesignerEntity : EntityManagement
     {
         public List<WorkerTask> designerTasks { get; set; }
+        private Random _random;
 
         public DesignerEntity()
         {
@@ -17,6 +18,7 @@ namespace lab2.Designer
             designerTasks.Add(new DesignerTask());
             designerTasks.Add(new DesignerTask("Create sketch", 50));
             designerTasks.Add(new DesignerTask("Draw", 60));
+            _random = new Random();
         }
 
         public void addTask(string description, int timeRequired)
@@ -26,7 +28,7 @@ namespace lab2.Designer
 
         public WorkerTask getRandomTask()
         {
-            return designerTasks[new Random().Next(designerTasks.Count)];
+            return designerTasks[_random.Next(designerTasks.Count)];
 
         }
 

@@ -8,6 +8,7 @@ namespace lab2.ProjectManager {
     public class ProjectManagerEntity : EntityManagement
     {
         public List<WorkerTask> projectManagerTasks { get; set; }
+        private Random _random;
 
         public ProjectManagerEntity()
         {
@@ -15,6 +16,7 @@ namespace lab2.ProjectManager {
             projectManagerTasks.Add(new ProjectManagerTask());
             projectManagerTasks.Add(new ProjectManagerTask("Analyze designer performance", 20));
             projectManagerTasks.Add(new ProjectManagerTask("Analyze group performance", 25));
+            _random = new Random();
         }
 
         public void addTask(string description, int timeRequired)
@@ -24,7 +26,7 @@ namespace lab2.ProjectManager {
 
         public WorkerTask getRandomTask()
         {
-            return projectManagerTasks[new Random().Next(projectManagerTasks.Count)];
+            return projectManagerTasks[_random.Next(projectManagerTasks.Count)];
 
         }
 

@@ -10,10 +10,12 @@ namespace lab2.Coder
     public class CoderEntity : EntityManagement
     {
         public List<WorkerTask> coderTasks { get; set; }
+        private Random _random;
 
         public CoderEntity()
         {
             coderTasks = new List<WorkerTask>();
+            _random = new Random();
             coderTasks.Add(new CoderTask());
             coderTasks.Add(new CoderTask("Review code", 15));
             coderTasks.Add(new CoderTask("Merge block of code", 40));
@@ -21,7 +23,7 @@ namespace lab2.Coder
 
         public WorkerTask getRandomTask()
         {
-            return coderTasks[new Random().Next(coderTasks.Count)];
+            return coderTasks[_random.Next(coderTasks.Count)];
         }
 
         public void addTask(string description, int timeRequired)

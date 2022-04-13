@@ -49,10 +49,6 @@ namespace lab2.Studio
         public bool runEventHendler(TextBox textBox)
         {
             isRunning = true;
-            if (_thread == null)
-            {
-                return false;
-            }
             _thread = new Thread(() => 
             {
                 Thread.CurrentThread.IsBackground = true;
