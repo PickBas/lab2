@@ -38,10 +38,10 @@
             // 
             // logBox
             // 
-            this.logBox.Location = new System.Drawing.Point(446, 38);
+            this.logBox.Location = new System.Drawing.Point(343, 38);
             this.logBox.Multiline = true;
             this.logBox.Name = "logBox";
-            this.logBox.Size = new System.Drawing.Size(320, 297);
+            this.logBox.Size = new System.Drawing.Size(423, 297);
             this.logBox.TabIndex = 0;
             // 
             // coderBtn

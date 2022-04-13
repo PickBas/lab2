@@ -45,7 +45,7 @@ namespace lab2.Designer.Tasks
 
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Designer: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
 
         public override bool Equals(object obj)

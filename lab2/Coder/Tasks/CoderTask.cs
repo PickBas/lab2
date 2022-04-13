@@ -45,7 +45,7 @@ namespace lab2.Coder.Tasks
 
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Coder: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
     }
 }

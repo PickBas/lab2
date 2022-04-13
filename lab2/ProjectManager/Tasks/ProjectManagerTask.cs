@@ -43,7 +43,7 @@
 
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Project manager: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
 
         public override bool Equals(object obj)

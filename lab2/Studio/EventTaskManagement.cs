@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using lab2.Coder;
 using lab2.Coder.Tasks;
@@ -46,19 +47,21 @@ namespace lab2.Studio
             switch (entityChoice)
             {
                 case 0:
-                    task = new CoderTask(coder.getRandomTask());
+                    task = coder.getRandomTask();
                     logBox.AppendText(task.ToString() + Environment.NewLine);
+                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
                     break;
                 case 1:
-                    task = new DesignerTask(designer.getRandomTask());
+                    task = designer.getRandomTask();
                     logBox.AppendText(task.ToString() + Environment.NewLine);
+                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
                     break;
                 case 2:
-                    task = new ProjectManagerTask(projectManager.getRandomTask());
+                    task = projectManager.getRandomTask();
                     logBox.AppendText(task.ToString() + Environment.NewLine);
+                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
                     break;
             }
-            Console.WriteLine("HERE");
 
             return true;
         }
