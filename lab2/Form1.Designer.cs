@@ -55,6 +55,7 @@
             this.coderInfoBtn.TabIndex = 1;
             this.coderInfoBtn.Text = "Coder info";
             this.coderInfoBtn.UseVisualStyleBackColor = true;
+            this.coderInfoBtn.Click += new System.EventHandler(this.coderInfoBtn_Click);
             // 
             // stopSimulation
             // 

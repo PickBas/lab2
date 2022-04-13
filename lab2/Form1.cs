@@ -33,5 +33,11 @@ namespace lab2
             simulationStop.Invoke(logBox);
             logBox.AppendText("Stopped simulation" + Environment.NewLine);
         }
+
+        private void coderInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm();
+            entityForm.Show();
+        }
     }
 }
