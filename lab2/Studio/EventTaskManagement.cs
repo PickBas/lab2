@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using lab2.Coder;
 using lab2.Coder.Tasks;
 using lab2.Designer;
-using lab2.Designer.Tasks;
 using lab2.ProjectManager;
 using lab2.ProjectManager.Tasks;
 
@@ -14,10 +12,10 @@ namespace lab2.Studio
 {
     public sealed class EventTaskManagement
     {
-        public CoderEntity coder { get; set; }
-        public DesignerEntity designer { get; set; }
-        public ProjectManagerEntity projectManager { get; set; }
-        private bool isRunning;
+        private readonly CoderEntity _coder;
+        private readonly DesignerEntity _designer;
+        private readonly ProjectManagerEntity _projectManager;
+        private bool _isRunning;
         private Thread _thread;
         private CancellationTokenSource _tokenSource;
         private static EventTaskManagement _instance;
@@ -26,10 +24,10 @@ namespace lab2.Studio
             DesignerEntity designer,
             ProjectManagerEntity projectManager)
         {
-            this.coder = coder;
-            this.designer = designer;
-            this.projectManager = projectManager;
-            isRunning = false;
+            _coder = coder;
+            _designer = designer;
+            _projectManager = projectManager;
+            _isRunning = false;
             _tokenSource = new CancellationTokenSource();
         }
 
@@ -48,7 +46,7 @@ namespace lab2.Studio
 
         public bool runEventHendler(TextBox textBox)
         {
-            isRunning = true;
+            _isRunning = true;
             _thread = new Thread(() => 
             {
                 Thread.CurrentThread.IsBackground = true;
@@ -62,7 +60,7 @@ namespace lab2.Studio
 
         public bool stopEventHendler(TextBox logBox)
         {
-            isRunning = false;
+            _isRunning = false;
             if (_thread != null)
             {
                 runRandomTask(logBox);
@@ -82,7 +80,7 @@ namespace lab2.Studio
         public async void runRandomTask(TextBox logBox)
         {
             WorkerTask task = new CoderTask();
-            while (isRunning)
+            while (_isRunning)
             {
                 await Task.Delay(new Random().Next(1, 10) * 1000, _tokenSource.Token)
                     .ContinueWith(t => executeRandomTask(logBox, task));
@@ -99,15 +97,15 @@ namespace lab2.Studio
             switch (entityChoice)
             {
                 case 0:
-                    task = coder.getRandomTask();
+                    task = _coder.getRandomTask();
                     logDelay(task, logBox);
                     break;
                 case 1:
-                    task = designer.getRandomTask();
+                    task = _designer.getRandomTask();
                     logDelay(task, logBox);
                     break;
                 case 2:
-                    task = projectManager.getRandomTask();
+                    task = _projectManager.getRandomTask();
                     logDelay(task, logBox);
                     break;
             }
