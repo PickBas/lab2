@@ -29,29 +29,32 @@
         private void InitializeComponent()
         {
             this.logBox = new System.Windows.Forms.TextBox();
-            this.coderBtn = new System.Windows.Forms.Button();
+            this.coderInfoBtn = new System.Windows.Forms.Button();
             this.stopSimulation = new System.Windows.Forms.Button();
             this.runSimulation = new System.Windows.Forms.Button();
-            this.projectManagerBtn = new System.Windows.Forms.Button();
-            this.designerBtn = new System.Windows.Forms.Button();
+            this.coderAddTask = new System.Windows.Forms.Button();
+            this.projectManagerAddTask = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.designerAddTask = new System.Windows.Forms.Button();
+            this.designerInfoBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // logBox
             // 
-            this.logBox.Location = new System.Drawing.Point(343, 38);
+            this.logBox.Location = new System.Drawing.Point(343, 12);
             this.logBox.Multiline = true;
             this.logBox.Name = "logBox";
-            this.logBox.Size = new System.Drawing.Size(423, 297);
+            this.logBox.Size = new System.Drawing.Size(423, 321);
             this.logBox.TabIndex = 0;
             // 
-            // coderBtn
+            // coderInfoBtn
             // 
-            this.coderBtn.Location = new System.Drawing.Point(24, 38);
-            this.coderBtn.Name = "coderBtn";
-            this.coderBtn.Size = new System.Drawing.Size(239, 80);
-            this.coderBtn.TabIndex = 1;
-            this.coderBtn.Text = "Coder";
-            this.coderBtn.UseVisualStyleBackColor = true;
+            this.coderInfoBtn.Location = new System.Drawing.Point(24, 12);
+            this.coderInfoBtn.Name = "coderInfoBtn";
+            this.coderInfoBtn.Size = new System.Drawing.Size(239, 45);
+            this.coderInfoBtn.TabIndex = 1;
+            this.coderInfoBtn.Text = "Coder info";
+            this.coderInfoBtn.UseVisualStyleBackColor = true;
             // 
             // stopSimulation
             // 
@@ -73,23 +76,50 @@
             this.runSimulation.UseVisualStyleBackColor = true;
             this.runSimulation.Click += new System.EventHandler(this.runSimulation_Click);
             // 
-            // projectManagerBtn
+            // coderAddTask
             // 
-            this.projectManagerBtn.Location = new System.Drawing.Point(24, 255);
-            this.projectManagerBtn.Name = "projectManagerBtn";
-            this.projectManagerBtn.Size = new System.Drawing.Size(239, 80);
-            this.projectManagerBtn.TabIndex = 4;
-            this.projectManagerBtn.Text = "Project manager";
-            this.projectManagerBtn.UseVisualStyleBackColor = true;
+            this.coderAddTask.Location = new System.Drawing.Point(24, 63);
+            this.coderAddTask.Name = "coderAddTask";
+            this.coderAddTask.Size = new System.Drawing.Size(239, 45);
+            this.coderAddTask.TabIndex = 6;
+            this.coderAddTask.Text = "Add task";
+            this.coderAddTask.UseVisualStyleBackColor = true;
             // 
-            // designerBtn
+            // projectManagerAddTask
             // 
-            this.designerBtn.Location = new System.Drawing.Point(24, 148);
-            this.designerBtn.Name = "designerBtn";
-            this.designerBtn.Size = new System.Drawing.Size(239, 80);
-            this.designerBtn.TabIndex = 5;
-            this.designerBtn.Text = "Designer";
-            this.designerBtn.UseVisualStyleBackColor = true;
+            this.projectManagerAddTask.Location = new System.Drawing.Point(24, 288);
+            this.projectManagerAddTask.Name = "projectManagerAddTask";
+            this.projectManagerAddTask.Size = new System.Drawing.Size(239, 45);
+            this.projectManagerAddTask.TabIndex = 7;
+            this.projectManagerAddTask.Text = "Add task";
+            this.projectManagerAddTask.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(24, 237);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(239, 45);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Project manager info";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // designerAddTask
+            // 
+            this.designerAddTask.Location = new System.Drawing.Point(24, 176);
+            this.designerAddTask.Name = "designerAddTask";
+            this.designerAddTask.Size = new System.Drawing.Size(239, 45);
+            this.designerAddTask.TabIndex = 9;
+            this.designerAddTask.Text = "Add task";
+            this.designerAddTask.UseVisualStyleBackColor = true;
+            // 
+            // designerInfoBtn
+            // 
+            this.designerInfoBtn.Location = new System.Drawing.Point(24, 125);
+            this.designerInfoBtn.Name = "designerInfoBtn";
+            this.designerInfoBtn.Size = new System.Drawing.Size(239, 45);
+            this.designerInfoBtn.TabIndex = 10;
+            this.designerInfoBtn.Text = "Designer info";
+            this.designerInfoBtn.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -97,11 +127,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.designerBtn);
-            this.Controls.Add(this.projectManagerBtn);
+            this.Controls.Add(this.designerInfoBtn);
+            this.Controls.Add(this.designerAddTask);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.projectManagerAddTask);
+            this.Controls.Add(this.coderAddTask);
             this.Controls.Add(this.runSimulation);
             this.Controls.Add(this.stopSimulation);
-            this.Controls.Add(this.coderBtn);
+            this.Controls.Add(this.coderInfoBtn);
             this.Controls.Add(this.logBox);
             this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Form1";
@@ -109,11 +142,15 @@
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.Button coderBtn;
+        private System.Windows.Forms.Button coderAddTask;
+        private System.Windows.Forms.Button projectManagerAddTask;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button designerAddTask;
+        private System.Windows.Forms.Button designerInfoBtn;
+
+        private System.Windows.Forms.Button coderInfoBtn;
         private System.Windows.Forms.Button stopSimulation;
         private System.Windows.Forms.Button runSimulation;
-        private System.Windows.Forms.Button projectManagerBtn;
-        private System.Windows.Forms.Button designerBtn;
 
         private System.Windows.Forms.TextBox logBox;
 

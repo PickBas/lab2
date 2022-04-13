@@ -55,6 +55,12 @@
     <Compile Include="Designer\DesignerEntity.cs" />
     <Compile Include="Designer\Tasks\DesignerTask.cs" />
     <Compile Include="Designer\Tasks\DesignerTaskCounter.cs" />
+    <Compile Include="EntityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntityForm.Designer.cs">
+      <DependentUpon>EntityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectManager\ProjectManagerEntity.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTask.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTaskCounter.cs" />
@@ -70,6 +76,9 @@
     <Compile Include="Studio\EventTaskManagement.cs" />
     <Compile Include="Studio\Studio.cs" />
     <Compile Include="Studio\WorkerTask.cs" />
+    <EmbeddedResource Include="EntityForm.resx">
+      <DependentUpon>EntityForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
