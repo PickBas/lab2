@@ -39,6 +39,14 @@ namespace lab2.Studio
             return _instance;
         }
 
+        private void logDelay(WorkerTask task, TextBox logBox)
+        {
+            logBox.AppendText(task.ToString() + Environment.NewLine);
+            Task.Delay(task.getTimeRequired() * 1000)
+                .ContinueWith(t=> logBox.AppendText(
+                    "Finished: " + task.getDescription() + Environment.NewLine));
+        }
+        
         public bool runRandomTask(TextBox logBox)
         {
             Random random = new Random();
@@ -48,18 +56,15 @@ namespace lab2.Studio
             {
                 case 0:
                     task = coder.getRandomTask();
-                    logBox.AppendText(task.ToString() + Environment.NewLine);
-                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
+                    logDelay(task, logBox);
                     break;
                 case 1:
                     task = designer.getRandomTask();
-                    logBox.AppendText(task.ToString() + Environment.NewLine);
-                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
+                    logDelay(task, logBox);
                     break;
                 case 2:
                     task = projectManager.getRandomTask();
-                    logBox.AppendText(task.ToString() + Environment.NewLine);
-                    Task.Delay(task.getTimeRequired() * 1000).ContinueWith(t=> logBox.AppendText("Finished: " + task.getDescription() + Environment.NewLine));
+                    logDelay(task, logBox);
                     break;
             }
 
