@@ -1,51 +1,57 @@
 ﻿using lab2.ProjectManager.Tasks;
 
-namespace lab2.Designer.Tasks;
-
-public sealed class DesignerTask : TaskManagement
+namespace lab2.Designer.Tasks
 {
-    public string description { get; set; }
-    public List<Tuple<int, string>> possibleActivities { get; set; }
-    public int timeRequired { get; set; }
-    private static DesignerTask _instance;
 
-    
-    
-    private DesignerTask()
+    public class DesignerTask : WorkerTask
     {
-        possibleActivities = new List<Tuple<int, string>>();
-        var timeReq = new[] {15, 30, 40};
-        possibleActivities.Add(new Tuple<int, string>(timeReq[0], "Come up with an idea."));
-        possibleActivities.Add(new Tuple<int, string>(timeReq[1], "Create sketch."));
-        possibleActivities.Add(new Tuple<int, string>(timeReq[2], "Draw."));
-        timeRequired = timeReq[new Random().Next(timeReq.Length)];
-        description = possibleActivities[timeRequired].Item2;
-    }
-    
-    public static DesignerTask getInstance()
-    {
-        if (_instance == null)
+        public string description { get; set; }
+        public int timeRequired { get; set; }
+
+        public DesignerTask()
         {
-            _instance = new DesignerTask();
+            description = "Come up with an idea";
+            timeRequired = 15;
         }
 
-        return _instance;
-    }
+        public DesignerTask(WorkerTask workerTask)
+        {
+            DesignerTask designerTask = (DesignerTask) workerTask;
+            description = designerTask.description;
+            timeRequired = designerTask.timeRequired;
+        }
 
-    public void appendActivity(string activity, int timeRequired)
-    {
-        possibleActivities.Add(new Tuple<int, string>(timeRequired, activity));
-        this.timeRequired = timeRequired;
-        description = activity;
-    }
+        public DesignerTask(string description, int timeRequired)
+        {
+            this.description = description;
+            this.timeRequired = timeRequired;
+        }
 
-    public double getPorpability()
-    {
-        return 1 / possibleActivities.Count * 100;
-    }
+        public bool @equals(WorkerTask workerTask)
+        {
+            var task = (DesignerTask)workerTask;
+            return description == task.description;
+        }
 
-    public string getLogString()
-    {
-        return description + " Estimated time: " + timeRequired + " seconds.";
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
+        public override string ToString()
+        {
+            return "Designer: " + description + " Estimated time: " + timeRequired + " seconds.";
+        }
+
+        public override bool Equals(object obj)
+        {
+            DesignerTask task = (DesignerTask) obj;
+            return description == task.description;
+        }
     }
 }
