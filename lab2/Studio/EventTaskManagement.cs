@@ -63,7 +63,6 @@ namespace lab2.Studio
             _isRunning = false;
             if (_thread != null)
             {
-                runRandomTask(logBox);
                 _tokenSource.Cancel();
                 _thread.Abort();
             }
