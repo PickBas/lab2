@@ -21,6 +21,9 @@ namespace lab2.Studio
         public ProjectManagerTaskCounter projectManagerTaskCounter { get; }
         private bool _isRunning;
         private Thread _thread;
+        private delegate void logDelegate(WorkerTask task, TextBox logBox);
+        private event logDelegate _logStartEvent;
+        private event logDelegate _logFinishEvent;
         private CancellationTokenSource _tokenSource;
         private static EventTaskManagement _instance;
 
@@ -35,6 +38,8 @@ namespace lab2.Studio
             designerTaskCounter = DesignerTaskCounter.getInstance();
             projectManagerTaskCounter = ProjectManagerTaskCounter.getInstance();
             _isRunning = false;
+            _logStartEvent += logDelay;
+            _logFinishEvent += executeFinishTask;
             _tokenSource = new CancellationTokenSource();
         }
 
@@ -94,7 +99,7 @@ namespace lab2.Studio
         {
             logBox.AppendText(task.ToString() + Environment.NewLine);
             await Task.Delay(task.getTimeRequired() * 1000, _tokenSource.Token)
-                .ContinueWith(t=> executeFinishTask(logBox, task));
+                .ContinueWith(t=> executeFinishTask(task, logBox));
         }
         
         public async void runRandomTask(TextBox logBox)
@@ -104,11 +109,11 @@ namespace lab2.Studio
             while (_isRunning)
             {
                 await Task.Delay(random.Next(1, 10) * 1000, _tokenSource.Token)
-                    .ContinueWith(t => executeRandomTask(logBox, task));
+                    .ContinueWith(t => executeRandomTask(task, logBox));
             }
         }
 
-        private void executeRandomTask(TextBox logBox, WorkerTask task)
+        private void executeRandomTask(WorkerTask task, TextBox logBox)
         {
             Random random = new Random();
             int entityChoice = random.Next(0, 3);
@@ -121,22 +126,22 @@ namespace lab2.Studio
                 case 0:
                     task = _coder.getRandomTask();
                     coderTaskCounter.addTask((CoderTask)task);
-                    logDelay(task, logBox);
+                    _logStartEvent?.Invoke(task, logBox);
                     break;
                 case 1:
                     task = _designer.getRandomTask();
                     designerTaskCounter.addTask((DesignerTask)task);
-                    logDelay(task, logBox);
+                    _logStartEvent?.Invoke(task, logBox);
                     break;
                 case 2:
                     task = _projectManager.getRandomTask();
                     projectManagerTaskCounter.addTask((ProjectManagerTask)task);
-                    logDelay(task, logBox);
+                    _logStartEvent?.Invoke(task, logBox);
                     break;
             }
         }
 
-        private void executeFinishTask(TextBox logBox, WorkerTask task)
+        private void executeFinishTask(WorkerTask task, TextBox logBox)
         {
             if (_tokenSource.IsCancellationRequested)
             {
