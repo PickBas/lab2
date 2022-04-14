@@ -1,4 +1,5 @@
-﻿using lab2.ProjectManager.Tasks;
+﻿using System;
+using lab2.ProjectManager.Tasks;
 
 namespace lab2.Coder.Tasks
 {
@@ -45,7 +46,17 @@ namespace lab2.Coder.Tasks
 
         public override string ToString()
         {
-            return "Coder: " + description + " Estimated time: " + timeRequired + " seconds.";
+            return "Coder: Started: "
+                   + description
+                   + " Estimated time: "
+                   + timeRequired
+                   + " seconds. Time: "
+                   + DateTime.Now;;
+        }
+
+        public string ToStringFinishTask()
+        {
+            return "Coder: Finished: " + description + ". Time: " + DateTime.Now;
         }
     }
 }

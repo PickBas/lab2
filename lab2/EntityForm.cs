@@ -25,7 +25,7 @@ namespace lab2
                 dr["Type"] = type;
                 dr["Description"] = tasks[i].Item2.getDescription();
                 dr["%"] = tasks[i].Item1.ToString();
-                dr["LastTimeCalled"] = DateTime.Now.ToString();
+                dr["LastTimeCalled"] = counterManagement.getTasksWithDateTime()[i].Item1.ToString();
                 table.Rows.Add(dr);
             }
             dataGridView1.DataSource = table;

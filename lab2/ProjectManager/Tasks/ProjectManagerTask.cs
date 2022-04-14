@@ -1,4 +1,6 @@
-﻿namespace lab2.ProjectManager.Tasks
+﻿using System;
+
+namespace lab2.ProjectManager.Tasks
 {
 
     public class ProjectManagerTask : WorkerTask
@@ -43,9 +45,19 @@
 
         public override string ToString()
         {
-            return "Project manager: " + description + " Estimated time: " + timeRequired + " seconds.";
+            return "Project manager: Started: "
+                   + description
+                   + ". Estimated time: "
+                   + timeRequired
+                   + " seconds. Time: "
+                   + DateTime.Now;
         }
 
+        public string ToStringFinishTask()
+        {
+            return "Project manager: Finished: " + description + ". Time: " + DateTime.Now;
+
+        }
         public override bool Equals(object obj)
         {
             var projectManagerTask2 = (ProjectManagerTask) obj;

@@ -1,4 +1,5 @@
-﻿using lab2.ProjectManager.Tasks;
+﻿using System;
+using lab2.ProjectManager.Tasks;
 
 namespace lab2.Designer.Tasks
 {
@@ -45,7 +46,18 @@ namespace lab2.Designer.Tasks
 
         public override string ToString()
         {
-            return "Designer: " + description + " Estimated time: " + timeRequired + " seconds.";
+            return "Designer: Started: " 
+                   + description
+                   + ". Estimated time: "
+                   + timeRequired
+                   + " seconds. Time: "
+                   + DateTime.Now;
+        }
+
+        public string ToStringFinishTask()
+        {
+            return "Designer: Finished: " + description + ". Time: " + DateTime.Now;
+
         }
 
         public override bool Equals(object obj)
