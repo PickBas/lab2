@@ -12,6 +12,13 @@
             timeRequired = 5;
         }
 
+        public ProjectManagerTask(WorkerTask workerTask)
+        {
+            ProjectManagerTask projectManagerTask = (ProjectManagerTask) workerTask;
+            description = projectManagerTask.description;
+            timeRequired = projectManagerTask.timeRequired;
+        }
+
         public ProjectManagerTask(string description, int timeRequired)
         {
             this.description = description;
@@ -24,9 +31,19 @@
             return description == task.description;
         }
 
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Project manager: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
 
         public override bool Equals(object obj)

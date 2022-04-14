@@ -14,6 +14,13 @@ namespace lab2.Designer.Tasks
             timeRequired = 15;
         }
 
+        public DesignerTask(WorkerTask workerTask)
+        {
+            DesignerTask designerTask = (DesignerTask) workerTask;
+            description = designerTask.description;
+            timeRequired = designerTask.timeRequired;
+        }
+
         public DesignerTask(string description, int timeRequired)
         {
             this.description = description;
@@ -26,9 +33,19 @@ namespace lab2.Designer.Tasks
             return description == task.description;
         }
 
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Designer: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
 
         public override bool Equals(object obj)

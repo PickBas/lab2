@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,9 +55,16 @@
     <Compile Include="Designer\DesignerEntity.cs" />
     <Compile Include="Designer\Tasks\DesignerTask.cs" />
     <Compile Include="Designer\Tasks\DesignerTaskCounter.cs" />
+    <Compile Include="EntityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntityForm.Designer.cs">
+      <DependentUpon>EntityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProjectManager\ProjectManagerEntity.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTask.cs" />
     <Compile Include="ProjectManager\Tasks\ProjectManagerTaskCounter.cs" />
+    <Compile Include="Studio\CounterManagement.cs" />
     <Compile Include="Studio\EntityManagement.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -64,8 +74,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Studio\EventTaskManagement.cs" />
     <Compile Include="Studio\Studio.cs" />
     <Compile Include="Studio\WorkerTask.cs" />
+    <EmbeddedResource Include="EntityForm.resx">
+      <DependentUpon>EntityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

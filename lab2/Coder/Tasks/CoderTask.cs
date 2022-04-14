@@ -14,6 +14,13 @@ namespace lab2.Coder.Tasks
             timeRequired = 30;
         }
 
+        public CoderTask(WorkerTask workerTask)
+        {
+            CoderTask coderTask = (CoderTask) workerTask;
+            description = coderTask.description;
+            timeRequired = coderTask.timeRequired;
+        }
+
         public CoderTask(string description, int timeRequired)
         {
             this.description = description;
@@ -26,9 +33,19 @@ namespace lab2.Coder.Tasks
             return coderTask2.description == description;
         }
 
+        public string getDescription()
+        {
+            return description;
+        }
+
+        public int getTimeRequired()
+        {
+            return timeRequired;
+        }
+
         public override string ToString()
         {
-            return description + " Estimated time: " + timeRequired + " seconds.";
+            return "Coder: " + description + " Estimated time: " + timeRequired + " seconds.";
         }
     }
 }
