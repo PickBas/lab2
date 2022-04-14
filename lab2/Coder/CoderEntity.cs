@@ -21,6 +21,11 @@ namespace lab2.Coder
             coderTasks.Add(new CoderTask("Merge block of code", 40));
         }
 
+        public int getAmountOfActivities()
+        {
+            return coderTasks.Count;
+        }
+
         public WorkerTask getRandomTask()
         {
             return coderTasks[_random.Next(coderTasks.Count)];

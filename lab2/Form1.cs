@@ -36,19 +36,28 @@ namespace lab2
 
         private void coderInfoBtn_Click(object sender, EventArgs e)
         {
-            EntityForm entityForm = new EntityForm(eventTaskManagement.coderTaskCounter, "CoderTask");
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.coderTaskCounter, 
+                "CoderTask",
+                eventTaskManagement.getEntity("coder").getAmountOfActivities());
             entityForm.Show();
         }
 
         private void designerInfoBtn_Click(object sender, EventArgs e)
         {
-            EntityForm entityForm = new EntityForm(eventTaskManagement.designerTaskCounter, "DesignerTask");
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.designerTaskCounter, 
+                "DesignerTask",
+                eventTaskManagement.getEntity("designer").getAmountOfActivities());
             entityForm.Show();
         }
 
         private void projectManagerInfoBtn_Click(object sender, EventArgs e)
         {
-            EntityForm entityForm = new EntityForm(eventTaskManagement.projectManagerTaskCounter, "ProjectManagerTask");
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.projectManagerTaskCounter, 
+                "ProjectManagerTask",
+                eventTaskManagement.getEntity("projectManager").getAmountOfActivities());
             entityForm.Show();
         }
     }

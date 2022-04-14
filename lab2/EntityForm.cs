@@ -7,9 +7,10 @@ namespace lab2
 {
     public partial class EntityForm : Form
     {
-        public EntityForm(CounterManagement counterManagement, string type)
+        public EntityForm(CounterManagement counterManagement, string type, int amountOfActivities)
         {
             InitializeComponent();
+            label2.Text += amountOfActivities;
             DataTable table = new DataTable();
             table.Columns.Add("#");
             table.Columns.Add("Type");

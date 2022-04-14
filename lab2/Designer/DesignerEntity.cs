@@ -26,6 +26,11 @@ namespace lab2.Designer
             designerTasks.Add(new DesignerTask(description, timeRequired));
         }
 
+        public int getAmountOfActivities()
+        {
+            return designerTasks.Count;
+        }
+
         public WorkerTask getRandomTask()
         {
             return designerTasks[_random.Next(designerTasks.Count)];

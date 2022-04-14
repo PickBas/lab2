@@ -38,6 +38,21 @@ namespace lab2.Studio
             _tokenSource = new CancellationTokenSource();
         }
 
+        public EntityManagement getEntity(string type)
+        {
+            switch (type)
+            {
+                case "coder":
+                    return _coder;
+                case "designer":
+                    return _designer;
+                case "projectManager":
+                    return _projectManager;
+            }
+
+            return null;
+        }
+
         public static EventTaskManagement getInstance(
             CoderEntity coder,
             DesignerEntity designer,

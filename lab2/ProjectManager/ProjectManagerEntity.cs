@@ -24,6 +24,11 @@ namespace lab2.ProjectManager {
             projectManagerTasks.Add(new ProjectManagerTask(description, timeRequired));
         }
 
+        public int getAmountOfActivities()
+        {
+            return projectManagerTasks.Count;
+        }
+
         public WorkerTask getRandomTask()
         {
             return projectManagerTasks[_random.Next(projectManagerTasks.Count)];
