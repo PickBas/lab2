@@ -99,7 +99,7 @@ namespace lab2.Studio
         {
             logBox.AppendText(task.ToString() + Environment.NewLine);
             await Task.Delay(task.getTimeRequired() * 1000, _tokenSource.Token)
-                .ContinueWith(t=> executeFinishTask(task, logBox));
+                .ContinueWith(t=> _logFinishEvent?.Invoke(task, logBox));
         }
         
         public async void runRandomTask(TextBox logBox)
@@ -147,8 +147,7 @@ namespace lab2.Studio
             {
                 return;
             }
-            logBox.AppendText(
-                "Finished: " + task.getDescription() + Environment.NewLine);
+            logBox.AppendText(task.ToStringFinishTask() + Environment.NewLine);
         }
     }
 }

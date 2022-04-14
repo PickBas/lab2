@@ -4,5 +4,6 @@
         string getDescription();
         int getTimeRequired();
         string ToString();
+        string ToStringFinishTask();
     }
 }
