@@ -13,12 +13,7 @@ namespace lab2.Studio
 {
     public sealed class EventTaskManagement
     {
-        private readonly CoderEntity _coder;
-        private readonly DesignerEntity _designer;
-        private readonly ProjectManagerEntity _projectManager;
-        public CoderTaskCounter coderTaskCounter { get; }
-        public DesignerTaskCounter designerTaskCounter { get; }
-        public ProjectManagerTaskCounter projectManagerTaskCounter { get; }
+        private readonly Studio _studio;
         private bool _isRunning;
         private Thread _thread;
         private delegate void logDelegate(WorkerTask task, TextBox logBox);
@@ -27,47 +22,27 @@ namespace lab2.Studio
         private CancellationTokenSource _tokenSource;
         private static EventTaskManagement _instance;
 
-        private EventTaskManagement(CoderEntity coder,
-            DesignerEntity designer,
-            ProjectManagerEntity projectManager)
+        private EventTaskManagement()
         {
-            _coder = coder;
-            _designer = designer;
-            _projectManager = projectManager;
-            coderTaskCounter = CoderTaskCounter.getInstance();
-            designerTaskCounter = DesignerTaskCounter.getInstance();
-            projectManagerTaskCounter = ProjectManagerTaskCounter.getInstance();
+            _studio = new Studio();
             _isRunning = false;
             _logStartEvent += logDelay;
             _logFinishEvent += executeFinishTask;
             _tokenSource = new CancellationTokenSource();
         }
 
-        public EntityManagement getEntity(string type)
-        {
-            switch (type)
-            {
-                case "coder":
-                    return _coder;
-                case "designer":
-                    return _designer;
-                case "projectManager":
-                    return _projectManager;
-            }
-
-            return null;
-        }
-
-        public static EventTaskManagement getInstance(
-            CoderEntity coder,
-            DesignerEntity designer,
-            ProjectManagerEntity projectManager)
+        public static EventTaskManagement getInstance()
         {
             if (_instance == null)
             {
-                _instance = new EventTaskManagement(coder, designer, projectManager);
+                _instance = new EventTaskManagement();
             }
             return _instance;
+        }
+
+        public Studio getStudio()
+        {
+            return _studio;
         }
 
         public bool runEventHendler(TextBox textBox)
@@ -88,7 +63,6 @@ namespace lab2.Studio
             _isRunning = false;
             if (_thread != null)
             {
-                runRandomTask(logBox);
                 _tokenSource.Cancel();
                 _thread.Abort();
             }
@@ -115,30 +89,12 @@ namespace lab2.Studio
 
         private void executeRandomTask(WorkerTask task, TextBox logBox)
         {
-            Random random = new Random();
-            int entityChoice = random.Next(0, 3);
             if (_tokenSource.IsCancellationRequested)
             {
                 return;
             }
-            switch (entityChoice)
-            {
-                case 0:
-                    task = _coder.getRandomTask();
-                    coderTaskCounter.addTask((CoderTask)task);
-                    _logStartEvent?.Invoke(task, logBox);
-                    break;
-                case 1:
-                    task = _designer.getRandomTask();
-                    designerTaskCounter.addTask((DesignerTask)task);
-                    _logStartEvent?.Invoke(task, logBox);
-                    break;
-                case 2:
-                    task = _projectManager.getRandomTask();
-                    projectManagerTaskCounter.addTask((ProjectManagerTask)task);
-                    _logStartEvent?.Invoke(task, logBox);
-                    break;
-            }
+            task = _studio.getRandomTask();
+            _logStartEvent?.Invoke(task, logBox);
         }
 
         private void executeFinishTask(WorkerTask task, TextBox logBox)

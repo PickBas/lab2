@@ -17,4 +17,8 @@
       <ProjectReference Include="..\lab2\lab2.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="TaskTests.cs" />
+    </ItemGroup>
+
 </Project>

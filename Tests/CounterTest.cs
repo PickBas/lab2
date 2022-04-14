@@ -14,9 +14,10 @@ namespace Tests
         {
             var taskCounter = CoderTaskCounter.getInstance();
             var studio = new Studio();
-            taskCounter.addTask((CoderTask)studio.coder.coderTasks[0]);
-            taskCounter.addTask((CoderTask)studio.coder.coderTasks[0]);
-            taskCounter.addTask((CoderTask)studio.coder.coderTasks[0]);
+            WorkerTask task = new CoderTask("Code block of code", 30);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new CoderTask("Do something", 3));
             Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
@@ -31,9 +32,10 @@ namespace Tests
         {
             var taskCounter = DesignerTaskCounter.getInstance();
             var studio = new Studio();
-            taskCounter.addTask((DesignerTask)studio.designer.designerTasks[0]);
-            taskCounter.addTask((DesignerTask)studio.designer.designerTasks[0]);
-            taskCounter.addTask((DesignerTask)studio.designer.designerTasks[0]);
+            WorkerTask task = new DesignerTask("Come up with an idea", 15);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new DesignerTask("Do something", 3));
             Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
@@ -48,9 +50,10 @@ namespace Tests
         {
             var taskCounter = ProjectManagerTaskCounter.getInstance();
             var studio = new Studio();
-            taskCounter.addTask((ProjectManagerTask)studio.projectManager.projectManagerTasks[0]);
-            taskCounter.addTask((ProjectManagerTask)studio.projectManager.projectManagerTasks[0]);
-            taskCounter.addTask((ProjectManagerTask)studio.projectManager.projectManagerTasks[0]);
+            WorkerTask task = new ProjectManagerTask("Analyze coder performance", 5);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
+            taskCounter.addTask(task);
             Assert.AreEqual(100.00, taskCounter.getProbability()[0].Item1);
             taskCounter.addTask(new ProjectManagerTask("Do something", 3));
             Assert.AreEqual(75.00, taskCounter.getProbability()[0].Item1);
