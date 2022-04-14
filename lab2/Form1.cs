@@ -60,5 +60,23 @@ namespace lab2
                 eventTaskManagement.getEntity("projectManager").getAmountOfActivities());
             entityForm.Show();
         }
+
+        private void coderAddTask_Click(object sender, EventArgs e)
+        {
+            AddEntityForm addEntityForm = new AddEntityForm(eventTaskManagement.getEntity("coder"));
+            addEntityForm.Show();
+        }
+
+        private void designerAddTask_Click(object sender, EventArgs e)
+        {
+            AddEntityForm addEntityForm = new AddEntityForm(eventTaskManagement.getEntity("designer"));
+            addEntityForm.Show();
+        }
+
+        private void projectManagerAddTask_Click(object sender, EventArgs e)
+        {
+            AddEntityForm addEntityForm = new AddEntityForm(eventTaskManagement.getEntity("projectManager"));
+            addEntityForm.Show();
+        }
     }
 }

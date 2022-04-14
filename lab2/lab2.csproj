@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddEntityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEntityForm.Designer.cs">
+      <DependentUpon>AddEntityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coder\CoderEntity.cs" />
     <Compile Include="Coder\Tasks\CoderTask.cs" />
     <Compile Include="Coder\Tasks\CoderTaskCounter.cs" />
@@ -77,6 +83,9 @@
     <Compile Include="Studio\EventTaskManagement.cs" />
     <Compile Include="Studio\Studio.cs" />
     <Compile Include="Studio\WorkerTask.cs" />
+    <EmbeddedResource Include="AddEntityForm.resx">
+      <DependentUpon>AddEntityForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntityForm.resx">
       <DependentUpon>EntityForm.cs</DependentUpon>
     </EmbeddedResource>

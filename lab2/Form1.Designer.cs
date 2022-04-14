@@ -85,6 +85,7 @@
             this.coderAddTask.TabIndex = 6;
             this.coderAddTask.Text = "Add task";
             this.coderAddTask.UseVisualStyleBackColor = true;
+            this.coderAddTask.Click += new System.EventHandler(this.coderAddTask_Click);
             // 
             // projectManagerAddTask
             // 
@@ -94,6 +95,7 @@
             this.projectManagerAddTask.TabIndex = 7;
             this.projectManagerAddTask.Text = "Add task";
             this.projectManagerAddTask.UseVisualStyleBackColor = true;
+            this.projectManagerAddTask.Click += new System.EventHandler(this.projectManagerAddTask_Click);
             // 
             // projectManagerInfoBtn
             // 
@@ -113,6 +115,7 @@
             this.designerAddTask.TabIndex = 9;
             this.designerAddTask.Text = "Add task";
             this.designerAddTask.UseVisualStyleBackColor = true;
+            this.designerAddTask.Click += new System.EventHandler(this.designerAddTask_Click);
             // 
             // designerInfoBtn
             // 
