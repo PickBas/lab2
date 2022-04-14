@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using lab2.Studio;
 
 namespace lab2.ProjectManager.Tasks
 {
 
-    public sealed class ProjectManagerTaskCounter
+    public sealed class ProjectManagerTaskCounter : CounterManagement
     {
         public List<Tuple<DateTime, ProjectManagerTask>> projectManagerTasks { get; set; }
         private static ProjectManagerTaskCounter _instance;
@@ -25,12 +26,22 @@ namespace lab2.ProjectManager.Tasks
             return _instance;
         }
 
-        public void addTask(ProjectManagerTask ProjectManagerTask)
+        public void addTask(WorkerTask projectManagerTask)
         {
-            projectManagerTasks.Add(new Tuple<DateTime, ProjectManagerTask>(DateTime.Now, ProjectManagerTask));
+            projectManagerTasks.Add(new Tuple<DateTime, ProjectManagerTask>(DateTime.Now, (ProjectManagerTask)projectManagerTask));
+        }
+        
+        public List<Tuple<DateTime, WorkerTask>> getTasksWithDateTime()
+        {
+            List<Tuple<DateTime, WorkerTask>> tasks = new List<Tuple<DateTime, WorkerTask>>();
+            foreach (var task in projectManagerTasks)
+            {
+                tasks.Add(new Tuple<DateTime, WorkerTask>(task.Item1, task.Item2));
+            }
+            return tasks;
         }
 
-        public List<Tuple<double, ProjectManagerTask>> getProbability()
+        public List<Tuple<double, WorkerTask>> getProbability()
         {
             var projectManagerTasksOrdered = projectManagerTasks
                 .OrderBy(o => o.Item2.description)
@@ -38,14 +49,14 @@ namespace lab2.ProjectManager.Tasks
                 .Select(o => o.Item2)
                 .ToList()
                 .GroupBy(o => new {o.description, o.timeRequired})
-                .Where(x => x.Count() > 1)
+                .Where(x => x.Any())
                 .Select(y => new { projectManagerTask = y.Key, amount = y.Count() })
                 .ToList();
-            List<Tuple<double, ProjectManagerTask>> result = new List<Tuple<double, ProjectManagerTask>>();
+            List<Tuple<double, WorkerTask>> result = new List<Tuple<double, WorkerTask>>();
             foreach (var entity in projectManagerTasksOrdered)
             {
                 var probability = (double)entity.amount / (double)projectManagerTasks.Count * 100;
-                result.Add(new Tuple<double, ProjectManagerTask>(
+                result.Add(new Tuple<double, WorkerTask>(
                     probability,
                     new ProjectManagerTask(
                         entity.projectManagerTask.description,

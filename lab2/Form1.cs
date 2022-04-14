@@ -33,5 +33,32 @@ namespace lab2
             simulationStop.Invoke(logBox);
             logBox.AppendText("Stopped simulation" + Environment.NewLine);
         }
+
+        private void coderInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.coderTaskCounter, 
+                "CoderTask",
+                eventTaskManagement.getEntity("coder").getAmountOfActivities());
+            entityForm.Show();
+        }
+
+        private void designerInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.designerTaskCounter, 
+                "DesignerTask",
+                eventTaskManagement.getEntity("designer").getAmountOfActivities());
+            entityForm.Show();
+        }
+
+        private void projectManagerInfoBtn_Click(object sender, EventArgs e)
+        {
+            EntityForm entityForm = new EntityForm(
+                eventTaskManagement.projectManagerTaskCounter, 
+                "ProjectManagerTask",
+                eventTaskManagement.getEntity("projectManager").getAmountOfActivities());
+            entityForm.Show();
+        }
     }
 }
